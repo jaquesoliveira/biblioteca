@@ -1,0 +1,1 @@
+export const ROOT_PATH = 'http://192.168.1.3:8080/library'
