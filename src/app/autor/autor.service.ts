@@ -31,6 +31,8 @@ export class AutorService{
         )
     }
 
+    
+
     getById(id: number): Observable<Autor>{
         const url = `${ROOT_PATH}/${this.apiPath}/${id}`
 
@@ -47,6 +49,15 @@ export class AutorService{
         .pipe(catchError(
             this.handlerError), 
             map(this.jsonDataToAutor)
+        )
+    }
+
+    filtrar(autor: Autor): Observable<Autor[]>{
+
+        return this.http.post(`${ROOT_PATH}/${this.apiPath}/filtrar`,  autor, httpOptions)
+        .pipe(catchError(
+            this.handlerError),
+            map(this.jsonDataToAutores)
         )
     }
 
