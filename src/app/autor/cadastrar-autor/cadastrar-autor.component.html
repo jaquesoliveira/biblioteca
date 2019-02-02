@@ -1,27 +1,29 @@
-<br>
-<span>Autor / cadastrar</span>
+<div class="mt-2">
+    <span> {{titulo}}</span>
+</div>
+
+<div class="myBox mt-2">
+    <form [formGroup]="autorForm" novalidate>            
+        <div class="row">
+            <div class="form-group col-2">
+                <input type="number" formControlName="autSeqAutor" class="form-control" placeholder="Código" readonly>
+            </div>
+
+            <div class="form-group col-2">
+            
+                <input type="text" formControlName="autNomeAutor" class="form-control" placeholder="Nome">
+            </div>
+        
+            <div class="form-group col-4">
+                <input type="text" formControlName="autDescricaoAutor" class="form-control" placeholder="Descrição">
+            </div>
+        </div>
 <hr>
-
-<form [formGroup]="autorForm" novalidate>
-    <div class="row">
-        <div class="form-group col-2">
-            <input type="number" formControlName="autSeqAutor" class="form-control" placeholder="Código" readonly>
+        <div class="row">
+            <div class="form-group col-4">          
+                <button (click) = "enviar()" class="btn btn-sm btn-primary">Salvar</button>&nbsp;
+                <button [routerLink] = "['/autor']" class="btn btn-sm btn-danger">Cancelar</button>
+            </div>
         </div>
-
-        <div class="form-group col-2">
-           
-            <input type="text" formControlName="autNomeAutor" class="form-control" placeholder="Nome">
-        </div>
-    
-        <div class="form-group col-4">
-            <input type="text" formControlName="autDescricaoAutor" class="form-control" placeholder="Descrição">
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="form-group col-4">          
-            <button (click) = "enviar()" class="btn btn-sm btn-primary">Salvar</button>&nbsp;
-            <button [routerLink] = "['/autor']" class="btn btn-sm btn-danger">Cancelar</button>
-        </div>
-    </div>
-  </form>
+    </form>
+</div>    

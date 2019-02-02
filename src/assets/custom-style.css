@@ -1,5 +1,5 @@
 body{
-	color: #333 !important;
+	color: #555 !important;
 	background-color: #f0f0f0;
 	min-height: 400px;
     font-size: 0.7rem;    
@@ -11,12 +11,12 @@ nav{
     color: #fff !important;
 }
 
-input{
+/* input{
     text-transform: uppercase;
-}
+} */
 
 table{
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .botoes{
@@ -29,7 +29,9 @@ table{
 	vertical-align: middle;	
 }
 
-
+tr:hover{
+     background-color: rgba(151, 191, 223, 0.816) !important;
+}
 
 .btn-actions{
 	text-align: end;

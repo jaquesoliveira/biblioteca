@@ -3,6 +3,7 @@ import { Autor } from '../autor.model';
 import { AutorService } from '../autor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import toastr from 'toastr';
 
 @Component({
   selector: 'app-pesquisar-autor',
@@ -45,18 +46,23 @@ export class PesquisarAutorComponent implements OnInit {
   }
 
   delete(id: number){
-    this.autorService.delete(id)
+
+    if (confirm("Deseje excluir este autor?")){
+      this.autorService.delete(id)
       .subscribe(
-        autor => this.pesquisar(),
+        // autor => this.pesquisar(),
+        autor => this.actionsForSuccess(),
         error => alert('Houve um erro!')
       )
+    }    
   }
 
-
-  private actionsForSuccess(autor: Autor){
-    this.router.navigateByUrl("autor", {skipLocationChange: true}).then(
-      () => this.router.navigate(["autor"])
-    )
+  private actionsForSuccess(){
+    toastr.info("Operação realizada com sucesso!")
+    // this.router.navigateByUrl("autor", {skipLocationChange: true}).then(
+    //   () => this.router.navigate(["autor"])
+    // )
+    this.pesquisar()
   }
 
   limpar(){

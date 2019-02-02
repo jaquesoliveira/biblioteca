@@ -4,6 +4,7 @@ import { Autor } from '../autor.model';
 import { AutorService } from '../autor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import toastr from 'toastr';
 
 @Component({
   selector: 'app-cadastrar-autor',
@@ -12,6 +13,7 @@ import { switchMap } from 'rxjs/operators';
 export class CadastrarAutorComponent implements OnInit {
 
   currentAction: string;
+  titulo: string
   autorForm: FormGroup;  
   @Input() autor: Autor = new Autor();
 
@@ -42,13 +44,14 @@ export class CadastrarAutorComponent implements OnInit {
     );
 
     if( this.route.snapshot.url[1].path == "new"){
-
+      
       const autor: Autor = Object.assign(new Autor(), this.autorForm.value);
 
       this.autorService.create(autor)
         .subscribe(
           autor => this.actionsForSuccess(autor),
-          error => alert('Houve um erro!')     
+          //error => alert('Houve um erro!')     
+          error => this.actionsForError()     
         );
     }else{
       const id =  this.route.snapshot.url[1].path
@@ -64,8 +67,10 @@ export class CadastrarAutorComponent implements OnInit {
   private setCurrentAction(){
     if( this.route.snapshot.url[1].path == "new"){
       this.currentAction = "new"
+      this.titulo = "Cadastrar Autor"
     }else{
       this.currentAction = "edit"
+      this.titulo = "Editar Autor"
     }   
   }
 
@@ -93,12 +98,13 @@ export class CadastrarAutorComponent implements OnInit {
   }
 
   private actionsForSuccess(autor: Autor){
+    toastr.info("Operação realizada com sucesso!")
     this.router.navigateByUrl("autor", {skipLocationChange: true}).then(
       () => this.router.navigate(["autor", autor.autSeqAutor, "edit"])
     )
   }
 
   private actionsForError(){
-    
+    toastr.info("Houve um erro. Não foi possível realizar a operação!")
   }
 }
