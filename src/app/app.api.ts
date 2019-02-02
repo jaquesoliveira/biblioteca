@@ -1,1 +1,1 @@
-export const ROOT_PATH = 'http://192.168.1.3:8080/library'
+export const ROOT_PATH = 'http://localhost:4200/library'
