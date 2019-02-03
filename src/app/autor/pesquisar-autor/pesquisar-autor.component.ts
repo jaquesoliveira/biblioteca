@@ -56,7 +56,7 @@ export class PesquisarAutorComponent implements OnInit {
       )
     }    
   }
-
+ 
   private actionsForSuccess(){
     toastr.info("Operação realizada com sucesso!")
     // this.router.navigateByUrl("autor", {skipLocationChange: true}).then(

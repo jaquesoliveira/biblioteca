@@ -9,14 +9,16 @@ nav{
 	background-color: #4682B4;
     padding: 15px;
     color: #fff !important;
+    max-height: 40px;
 }
-
-/* input{
-    text-transform: uppercase;
-} */
 
 table{
     text-transform: capitalize;
+}
+
+.table-caption{
+    background-color: #4682B4;
+    color: #fff;
 }
 
 .botoes{
@@ -79,3 +81,33 @@ tr:hover{
     border-radius: 5px;
 }
 
+.myFooter{
+    background-color: rgb(153, 151, 151);
+    position: fixed;
+    bottom: 0px;
+    height: 20px;
+    width: 100%;
+    text-align: center; 
+    vertical-align: middle !important;    
+}
+
+a.link-footer:link{
+    text-decoration: none;
+    color: #fff !important;
+}
+
+a.link-footer:visited{
+    text-decoration: none !important;
+    color: #fff !important;
+}
+
+a.link-footer:hover{
+    text-decoration: none;
+    color: #fff !important;
+}
+
+a.nav-link:any-link{
+    text-decoration: none;
+    color: #fff !important;
+    font-weight: bold;
+}
