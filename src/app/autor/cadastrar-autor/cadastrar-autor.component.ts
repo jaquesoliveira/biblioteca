@@ -41,7 +41,7 @@ export class CadastrarAutorComponent implements OnInit {
       dadosFormulario.autSeqAutor,
       dadosFormulario.autNomeAutor,
       dadosFormulario.autDescricaoAutor
-    );
+    );  
 
     if( this.route.snapshot.url[1].path == "new"){
       
@@ -60,18 +60,20 @@ export class CadastrarAutorComponent implements OnInit {
         autor => this.actionsForSuccess(autor),
         error => alert('Houve um erro!')     
       );
-    }
+    }    
   }
 
   //
   private setCurrentAction(){
-    if( this.route.snapshot.url[1].path == "new"){
-      this.currentAction = "new"
-      this.titulo = "Cadastrar Autor"
-    }else{
-      this.currentAction = "edit"
-      this.titulo = "Editar Autor"
-    }   
+    if( this.route.snapshot.url[1] != undefined){
+      if( this.route.snapshot.url[1].path == "new"){
+        this.currentAction = "new"
+        this.titulo = "Cadastrar Autor"
+      }else{
+        this.currentAction = "edit"
+        this.titulo = "Editar Autor"
+      }
+    }  
   }
 
   private buildAutorForm(){

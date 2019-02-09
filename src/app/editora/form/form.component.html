@@ -1,0 +1,34 @@
+<div class="mt-2">
+    <span> {{titulo}}</span>
+</div>
+
+<div class="myBox mt-2">
+    <form [formGroup]="editoraForm" novalidate>            
+        <div class="row">
+            <div class="form-group col-2">
+                <input type="number" formControlName="edtSeqEditora" class="form-control" placeholder="Código" readonly>
+            </div>
+
+            <div class="form-group col-4">
+            
+                <input type="text" formControlName="edtNomeEditora" class="form-control" placeholder="Nome">
+            </div>
+        
+            <div class="form-group col-6">
+                <input type="text" formControlName="edtDescricaoEditora" class="form-control" placeholder="Descrição">
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="form-group col-4">          
+                <button (click) = "enviar()" class="btn btn-sm btn-primary">
+                    Salvar
+                </button>&nbsp;
+                
+                <button [routerLink] = "['/editora']" class="btn btn-sm btn-danger">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>    

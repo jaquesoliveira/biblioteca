@@ -17,7 +17,7 @@ export class PesquisarAutorComponent implements OnInit {
   autores: Autor[] = []
 
   constructor(
-      private autorService: AutorService,          
+      private autorService: AutorService,
       private route: ActivatedRoute,
       private router: Router,
       private formBuilder: FormBuilder
@@ -25,7 +25,7 @@ export class PesquisarAutorComponent implements OnInit {
 
   ngOnInit() {
     this.buildAutorForm();
-    this.pesquisar();  
+    this.pesquisar();
   }
 
   pesquisar(){
@@ -35,7 +35,7 @@ export class PesquisarAutorComponent implements OnInit {
     )
   }
 
-  filtrar(){    
+  filtrar(){
 
     const autor: Autor = Object.assign(new Autor(), this.autorFormPesquisa.value);
 

@@ -6,9 +6,9 @@ body{
 }
 
 nav{
-	background-color: #4682B4;
-    padding: 15px;
+    background-color: #4682B4;
     color: #fff !important;
+    padding: 15px;    
     max-height: 40px;
 }
 
@@ -110,4 +110,14 @@ a.nav-link:any-link{
     text-decoration: none;
     color: #fff !important;
     font-weight: bold;
+}
+
+#logo_centro {
+	width: 300px;
+	height: 130px;
+	margin-left: -150px; /* metade da largura */
+	margin-top: -85px; /* metade da altura */
+	position: absolute !important;
+	top: 50% !important;
+	left: 50% !important;
 }
