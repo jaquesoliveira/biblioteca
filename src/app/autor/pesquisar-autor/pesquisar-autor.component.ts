@@ -66,7 +66,7 @@ export class PesquisarAutorComponent implements OnInit {
   }
 
   limpar(){
-    this.autores = []
+    //this.autores = []
     this.buildAutorForm();
   }
 

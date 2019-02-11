@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Editora } from '../editora.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { EditoraService } from '../editora.service';
 import toastr from 'toastr';
 
 @Component({
   selector: 'app-pesquisar-editora',
-  templateUrl: './pesquisar-editora.component.html',
-  styleUrls: ['./pesquisar-editora.component.css']
+  templateUrl: './pesquisar-editora.component.html'
 })
 
 export class PesquisarEditoraComponent implements OnInit {
@@ -23,37 +23,37 @@ export class PesquisarEditoraComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.buildAutorForm();
+    this.buildEditoraForm();
     this.pesquisar();  
   }
 
   pesquisar(){
-    // this.autorService.getAll().subscribe(
-    //   autores => this.autores = autores,
-    //   error => alert('Houve um erro!')      
-    // )
+    this.editoraService.getAll().subscribe(
+      editoras => this.editoras = editoras,
+      error => alert('Houve um erro!')      
+    )
   }
 
   filtrar(){    
 
-    // const autor: Autor = Object.assign(new Autor(), this.autorFormPesquisa.value);
+    const editora: Editora = Object.assign(new Editora(), this.editoraFormPesquisa.value);
 
-    // this.autorService.filtrar(autor).subscribe(
-    //   autores => this.autores = autores,
-    //   error => alert('Houve um erro!')     
-    // );
+    this.editoraService.filtrar(editora).subscribe(
+      editoras => this.editoras = editoras,
+      error => alert('Houve um erro!')     
+    );
   }
 
   delete(id: number){
 
-    // if (confirm("Deseje excluir este autor?")){
-    //   this.autorService.delete(id)
-    //   .subscribe(
-    //     // autor => this.pesquisar(),
-    //     autor => this.actionsForSuccess(),
-    //     error => alert('Houve um erro!')
-    //   )
-    // }    
+    if (confirm("Deseje excluir esta Editora?")){
+      this.editoraService.delete(id)
+      .subscribe(
+        //autor => this.pesquisar(),
+        autor => this.actionsForSuccess(),
+        error => alert('Houve um erro!')
+      )
+    }    
   }
 
   private actionsForSuccess(){
@@ -65,13 +65,13 @@ export class PesquisarEditoraComponent implements OnInit {
   }
 
   limpar(){
-    this.editoras = []
-    this.buildAutorForm();
+    //this.editoras = []
+    this.buildEditoraForm();
   }
 
-  private buildAutorForm(){
+  private buildEditoraForm(){
     this.editoraFormPesquisa = this.formBuilder.group({
-      edtNomeEditora: this.formBuilder.control('')
+      nome: this.formBuilder.control('')
     });
   }
 }

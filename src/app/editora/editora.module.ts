@@ -5,11 +5,13 @@ import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/c
 import { EditoraComponent } from './editora.component';
 import { FormComponent } from './form/form.component';
 import { PesquisarEditoraComponent } from './pesquisar-editora/pesquisar-editora.component';
+import { EditoraService } from './editora.service';
+
 
 const ROUTES: Routes = [
     {path: '' , component: PesquisarEditoraComponent},
     {path: 'new', component: FormComponent},
-     {path: ':id/edit', component: FormComponent}  
+    {path: ':id/edit', component: FormComponent}  
 ]
 
 @NgModule({
@@ -24,7 +26,7 @@ const ROUTES: Routes = [
         ReactiveFormsModule,
         CommonModule],
   
-    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}]
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, EditoraService]
 
 })
 

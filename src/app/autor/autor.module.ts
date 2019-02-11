@@ -9,7 +9,6 @@ import { CadastrarAutorComponent } from './cadastrar-autor/cadastrar-autor.compo
 
 
 const ROUTES: Routes = [
-    //{path: '', component: AutorComponent},
     {path: '', component: PesquisarAutorComponent},
     {path: 'new', component: CadastrarAutorComponent},
     {path: ':id/edit', component: CadastrarAutorComponent}  

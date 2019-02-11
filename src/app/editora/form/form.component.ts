@@ -41,33 +41,34 @@ export class FormComponent implements OnInit {
     const edtForm = new Editora(
       dadosFormulario.edtSeqEditora,
       dadosFormulario.edtNomeEditora,
-      dadosFormulario.edtDescricaoEditora
-    );  
+      dadosFormulario.edtDscEditora
+    ); 
+     
 
-    if( this.route.snapshot.url[1].path == "new"){
+    if( this.route.snapshot.url[0].path == "new"){
       
       const editora: Editora = Object.assign(new Editora(), this.editoraForm.value);
 
-      // this.editoraService.create(editora)
-      //   .subscribe(
-      //     autor => this.actionsForSuccess(autor),
-      //     //error => alert('Houve um erro!')     
-      //     error => this.actionsForError()     
-      //   );
+      this.editoraService.create(editora)
+        .subscribe(
+          editora => this.actionsForSuccess(editora),
+          //error => alert('Houve um erro!')     
+          error => this.actionsForError()     
+        );
     }else{
-      const id =  this.route.snapshot.url[1].path
+      const id =  this.route.snapshot.url[0].path
       
-      // this.editoraService.update(edtForm).subscribe(
-      //   autor => this.actionsForSuccess(autor),
-      //   error => alert('Houve um erro!')     
-      // );
+      this.editoraService.update(edtForm).subscribe(
+        editora => this.actionsForSuccess(editora),
+        error => alert('Houve um erro!')     
+      );
     }    
   }
 
   //
   private setCurrentAction(){
-    if( this.route.snapshot.url[1] != undefined){
-      if( this.route.snapshot.url[1].path == "new"){
+    if( this.route.snapshot.url[0] != undefined){
+      if( this.route.snapshot.url[0].path == "new"){
         this.currentAction = "new"
         this.titulo = "Cadastrar Editora"
       }else{
@@ -75,36 +76,38 @@ export class FormComponent implements OnInit {
         this.titulo = "Editar Editora"
       }
     }  
+
+    console.log(this.currentAction)
   }
 
   private buildEditoraForm(){
     this.editoraForm = this.formBuilder.group({
       edtSeqEditora: this.formBuilder.control(''),
       edtNomeEditora: this.formBuilder.control(''),
-      edtDescricaoEditora:  this.formBuilder.control('')
+      edtDscEditora:  this.formBuilder.control('')
     });
   }
 
   private loadEditora(){    
     if(this.currentAction == "edit"){
-      this.route.paramMap.pipe(
-        //switchMap(params => this.editoraService.getById(+params.get("id")))
+      this.route.paramMap.pipe(        
+        switchMap(params => this.editoraService.getById(+params.get("id")))
       )
       .subscribe(
         (editora) => {
-          //this.editora = editora;
-          //this.editoraForm.patchValue(editora)
+          this.editora = editora;
+          this.editoraForm.patchValue(editora)
         },
         (error) => alert('Ocorreu um erro')
-      )
+      )     
     }
   }
 
-  private actionsForSuccess(autor: Editora){
+  private actionsForSuccess(editora: Editora){
     toastr.info("Operação realizada com sucesso!")
-    // this.router.navigateByUrl("autor", {skipLocationChange: true}).then(
-    //   () => this.router.navigate(["autor", autor.autSeqAutor, "edit"])
-    // )
+    this.router.navigateByUrl("editora", {skipLocationChange: true}).then(
+       () => this.router.navigate(["editora", editora.edtSeqEditora, "edit"])
+    )
   }
 
   private actionsForError(){
