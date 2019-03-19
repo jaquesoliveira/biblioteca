@@ -166,3 +166,11 @@ a.article, a.article:hover {
         display: none;
     }
 }
+
+.nav-bottom{
+    /* justify-content: center; */
+}
+
+a {
+    color: #777;
+}

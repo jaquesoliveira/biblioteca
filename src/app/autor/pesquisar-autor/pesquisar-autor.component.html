@@ -1,47 +1,48 @@
-<div class="mt-2">
-    <span>Pesquisar Autor</span>
-</div >  
-  <div class="myBoxPesquisarAutor mt-2">    
-    <form  [formGroup]="autorFormPesquisa"  novalidate>
-      <div class="form-group row ">
-        <div class="form-group col-4">
-            <input type="text" formControlName="autNomeAutor"  class="form-control"  placeholder="Nome">
-        </div>
-        <div class="form-group col-4">          
-            <button type="button" (click) ="filtrar()"  class="btn btn-sm btn-info"><i class="fas fa-search"></i>Pesquisar</button>&nbsp;
-            <button type="button" (click) ="limpar()"  class="btn btn-sm btn-secondary"><span class="col-lg">Limpar</span></button>&nbsp;
-            <button type="button" [routerLink] = "['new']" class="btn btn-sm btn-primary">Novo</button>
-        </div>
-      </div>    
-    </form>
+<div class="mt-5 mb-5" style="position:relative; top: 40px">
+  <div class="position:relative">
+    <nav class="navbar fixed-top  navbar-dark bg-primary text-center">
+      <a class="btn btn-primary" href="#">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <a class="btn" href="#" style="color:white">
+        Autores
+      </a>
+      <a href="" class="btn">
+        &nbsp; &nbsp; &nbsp;
+      </a>     
+    </nav>      
+  </div>
+  <div class="row p-2" style="top:250px;">
+    <nav class="nav justify-content-center fixed-top navbar-dark p-2 mt-0" style="top:54px;  background-color: #e3f2fd;">     
+      <form [formGroup]="autorFormPesquisa" style="width:100%;" novalidate>        
+        <input type="search" formControlName="autNomeAutor" class="form-control text-capitalize" placeholder="Nome do autor">        
+      </form>
+    </nav>    
+  </div>
+  <ul class="list-group list-group-flush" *ngFor="let autor of autores">
+    <a [routerLink]="[autor.autSeqAutor, 'edit']" style="text-decoration: none; ">
+      <li class="list-group-item text-capitalize">{{autor.autNomeAutor}} </li>
+    </a>
+  </ul>
+  <div *ngIf="autores.length === 0">
+    <p class="text-center">Nenhum autor foi encontrado</p>
   </div>
 
-  <div>
   <br>
-  <div class="myBox" *ngIf="autores.length > 0">
-    <table  class="table table-striped table-hover table-sm table-responsive-sm" >
-      <thead class="table-caption">
-        <th width="50px">Código</th>
-        <th width="200px">Nome</th>
-        <th>Descrição</th>
-        <th class="btn-actions" width="30px"></th>
-      </thead>
-    </table>  
-  <div style="overflow:auto; height:300px !important;">
-    <table  class="table table-striped table-hover table-sm">
-      <tr *ngFor="let autor of autores">
-        <td width="50px">{{autor.autSeqAutor}}</td>
-        <td width="200px">{{autor.autNomeAutor}}</td>
-        <td>{{autor.autDescricaoAutor}}</td>
-        <td class="btn-actions">
-          <button [routerLink] = "[autor.autSeqAutor, 'edit']" class="btn btn-sm" title="Alterar"><i class="fas fa-edit"></i></button>&nbsp;
-          <button (click) = "delete(autor.autSeqAutor)" class="btn btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></button>
-        </td>
-      </tr>      
-    </table>
-  </div>
-  <div class="mt-1">
-      Total de autores encontrados: {{autores.length}}  
-  </div>  
 </div>
-</div>
+
+<nav class="navbar fixed-bottom  navbar-dark bg-primary nav-bottom">
+
+  <button type="button" (click)="filtrar()" title="Adicionar autor" class="btn btn-sm btn-primary  mr-1">
+    <i class="fas fa-search"></i>
+    Pesquisar
+  </button>
+  <button type="button" (click)="limpar()" class="btn btn-sm btn-primary mr-1">
+    <i class="fas fa-eraser"></i>
+    Limpar
+  </button>
+  <button type="button" [routerLink]="['new']" class="btn btn-primary btn-sm">
+    <i class="fas fa-plus"></i>
+    Adicionar
+  </button>
+</nav>

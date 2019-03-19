@@ -7,6 +7,9 @@ import { Autor } from './autor.model';
 import { element } from '@angular/core/src/render3';
 
 import {ROOT_PATH} from '../app.api';
+import { environment } from 'src/environments/environment';
+
+
 
 const httpOptions = {
     headers: new HttpHeaders(
@@ -26,8 +29,12 @@ export class AutorService{
     
     constructor(private http: HttpClient){}
 
+
+
     getAll(): Observable<Autor[]>{
-        return this.http.get<Autor[]>(`${ROOT_PATH}/${this.apiPath}`)
+        
+
+        return this.http.get<Autor[]>(`${environment.apiUrl}/${this.apiPath}`)
         .pipe(catchError(
             this.handlerError),
             map(this.jsonDataToAutores)
@@ -48,7 +55,7 @@ export class AutorService{
 
     create(autor: Autor): Observable<Autor> {
 
-        return this.http.post(`${ROOT_PATH}/${this.apiPath}`, autor, httpOptions)
+        return this.http.post(`${environment.apiUrl}/${this.apiPath}`, autor, httpOptions)
         .pipe(catchError(
             this.handlerError), 
             map(this.jsonDataToAutor)
@@ -57,7 +64,7 @@ export class AutorService{
 
     filtrar(autor: Autor): Observable<Autor[]>{
 
-        return this.http.post(`${ROOT_PATH}/${this.apiPath}/filtrar`,  autor, httpOptions)
+        return this.http.post(`${environment.apiUrl}/${this.apiPath}/filtrar`,  autor, httpOptions)
         .pipe(catchError(
             this.handlerError),
             map(this.jsonDataToAutores)
@@ -66,7 +73,7 @@ export class AutorService{
 
     update(autor: Autor): Observable<Autor> {
 
-        const url = `${ROOT_PATH}/${this.apiPath}/${autor.autSeqAutor}`
+        const url = `${environment.apiUrl}/${this.apiPath}/${autor.autSeqAutor}`
 
         return this.http.put<Autor>(url, autor)
         .pipe(catchError(
@@ -76,7 +83,7 @@ export class AutorService{
     }
 
     delete(id: number): Observable<any>{
-        const url = `${ROOT_PATH}/${this.apiPath}/${id}`
+        const url = `${environment.apiUrl}/${this.apiPath}/${id}`
 
         return this.http.delete(url)
         .pipe(catchError(

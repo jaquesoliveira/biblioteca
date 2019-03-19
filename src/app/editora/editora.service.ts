@@ -3,7 +3,7 @@ import { Observable, from, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { Editora } from './editora.model';
-import {ROOT_PATH} from '../app.api';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -27,7 +27,7 @@ export class EditoraService{
 
     getAll(): Observable<Editora[]>{        
 
-        return this.http.get<Editora[]>(`${ROOT_PATH}/${this.apiPath}`)
+        return this.http.get<Editora[]>(`${environment.apiUrl}/${this.apiPath}`)
         .pipe(catchError(
             this.handlerError),
             map(this.jsonDataToEditoras)
@@ -37,7 +37,7 @@ export class EditoraService{
     
 
     getById(id: number): Observable<Editora>{
-        const url = `${ROOT_PATH}/${this.apiPath}/${id}`
+        const url = `${environment.apiUrl}/${this.apiPath}/${id}`
 
         return this.http.get(url)
         .pipe(catchError(
@@ -48,7 +48,7 @@ export class EditoraService{
 
     create(editora: Editora): Observable<Editora> {
 
-        return this.http.post(`${ROOT_PATH}/${this.apiPath}`, editora, httpOptions)
+        return this.http.post(`${environment.apiUrl}/${this.apiPath}`, editora, httpOptions)
         .pipe(catchError(
             this.handlerError), 
             map(this.jsonDataToEditora)
@@ -57,7 +57,7 @@ export class EditoraService{
 
     filtrar(editora: Editora): Observable<Editora[]>{
 
-        return this.http.post(`${ROOT_PATH}/${this.apiPath}/filtrar`,  editora, httpOptions)
+        return this.http.post(`${environment.apiUrl}/${this.apiPath}/filtrar`,  editora, httpOptions)
         .pipe(catchError(
             this.handlerError),
             map(this.jsonDataToEditoras)
@@ -66,7 +66,7 @@ export class EditoraService{
 
     update(editora: Editora): Observable<Editora> {
 
-        const url = `${ROOT_PATH}/${this.apiPath}/${editora.edtSeqEditora}`
+        const url = `${environment.apiUrl}/${this.apiPath}/${editora.edtSeqEditora}`
 
         return this.http.put<Editora>(url, editora)
         .pipe(catchError(
@@ -76,7 +76,7 @@ export class EditoraService{
     }
 
     delete(id: number): Observable<any>{
-        const url = `${ROOT_PATH}/${this.apiPath}/${id}`
+        const url = `${environment.apiUrl}/${this.apiPath}/${id}`
 
         return this.http.delete(url)
         .pipe(catchError(

@@ -1,34 +1,75 @@
-<div class="mt-2">
-    <span> {{titulo}}</span>
-</div>
+<div class="mt-5" style="position:relative; top: 20px">
+  <div>
+    <nav class="navbar fixed-top  navbar-dark bg-primary text-center">
+      <a class="btn btn-primary"  [routerLink]="['/editora']">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <a class="btn" href="#" style="color:white">
+        {{titulo}}
+      </a>
+      <a  class="btn" >
+        &nbsp; &nbsp; &nbsp;
+      </a>
+    </nav>
+  </div>
 
-<div class="myBox mt-2">
-    <form [formGroup]="editoraForm" novalidate>            
-        <div class="row">
-            <div class="form-group col-2">
-                <input type="number" formControlName="edtSeqEditora" class="form-control" placeholder="Código" readonly>
-            </div>
+  <form [formGroup]="editoraForm" novalidate>
+    <div class="form-group d-none">
+      <input type="number" formControlName="edtSeqEditora" class="form-control" placeholder="Código" readonly>
+    </div>
 
-            <div class="form-group col-4">
-            
-                <input type="text" formControlName="edtNomeEditora" class="form-control" placeholder="Nome">
-            </div>
-        
-            <div class="form-group col-6">
-                <input type="text" formControlName="edtDscEditora" class="form-control" placeholder="Descrição">
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="form-group col-4">          
-                <button (click) = "enviar()" class="btn btn-sm btn-primary">
-                    Salvar
-                </button>&nbsp;
-                
-                <button [routerLink] = "['/editora']" class="btn btn-sm btn-danger">
-                    Cancelar
-                </button>
-            </div>
-        </div>
+    <div class="form-group col-sm-12 row">
+      <input type="text" formControlName="edtNomeEditora" class="form-control" placeholder="Nome">
+    </div>
+
+    <div class="form-group col-sm-12 row">
+      <textarea rows="4" cols="50" formControlName="edtDscEditora" class="form-control" placeholder="Descrição"></textarea>
+    </div>
+  </form>
+  <!-- 
+<div class="card mt-3 mb-3">  
+  <div class="card-header">
+    {{titulo}}
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="editoraForm" novalidate>
+      <div class="form-group col-2  d-none">
+        <input type="number" formControlName="edtSeqEditora" class="form-control" placeholder="Código" readonly>
+      </div>
+
+      <div class="form-group col-sm-12 row">
+        <input type="text" formControlName="edtNomeEditora" class="form-control" placeholder="Nome">
+      </div>
+
+      <div class="form-group col-sm-12 row">
+        <textarea rows="4" cols="50" formControlName="edtDscEditora" class="form-control" placeholder="Descrição"></textarea>
+      </div>
     </form>
-</div>    
+  </div>
+
+  <div class="card-footer text-muted">
+    <div class="form-group col-sm-12 row">
+      <button (click)="enviar()" class="btn btn-sm btn-primary">
+        Salvar
+      </button>&nbsp;
+
+      <button [routerLink]="['/editora']" class="btn btn-sm btn-danger">
+        Cancelar
+      </button>&nbsp;
+      <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-secondary" title="Excluir">Excluir</button>
+    </div>
+  </div>
+</div> -->
+</div>
+<nav class="navbar fixed-bottom navbar-dark bg-primary nav-bottom">
+  <button (click)="enviar()" class="btn btn-sm btn-primary mr-1">
+    <i class="fas fa-save"></i>
+    Salvar
+  </button>
+
+  <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-primary" title="Excluir">
+      <i class="fas fa-trash-alt"></i>
+    Excluir
+  </button>
+</nav>

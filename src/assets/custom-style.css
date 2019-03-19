@@ -1,4 +1,54 @@
-body{
+html, body, nav{
+    /* max-width: 700px; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.myFooter{
+    background-color: rgb(153, 151, 151);
+    position: fixed;
+    bottom: 0px;
+    height: 20px;
+    width: 100%;
+    text-align: center; 
+    vertical-align: middle !important;    
+}
+
+
+.nav-bottom{
+    justify-content: center;
+    background-color: #ccc;
+}
+
+a {
+    color: #777;
+}
+
+
+/* .list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: .0rem;
+    border-bottom-left-radius: .0rem;
+}
+
+
+.list-group-item:first-child {
+    border-top-left-radius: .0rem;
+    border-top-right-radius: .0rem;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-bottom: 1px !important; 
+} */
+
+
+/* body{
 	color: #555 !important;
 	background-color: #f0f0f0;
 	min-height: 400px;
@@ -63,7 +113,6 @@ tr:hover{
 }
 
 .myBox{
-    /* border: 1px solid #ced4da; */
     padding: 10px;
     background-color: #fff;
     height: 0 auto;
@@ -73,7 +122,7 @@ tr:hover{
 }
 
 .myBoxPesquisarAutor{
-    /* border: 1px solid #ced4da; */
+    /* border: 1px solid #ced4da; 
     padding: 10px;
     background-color: #fff;
     height: 50px;
@@ -81,15 +130,7 @@ tr:hover{
     border-radius: 5px;
 }
 
-.myFooter{
-    background-color: rgb(153, 151, 151);
-    position: fixed;
-    bottom: 0px;
-    height: 20px;
-    width: 100%;
-    text-align: center; 
-    vertical-align: middle !important;    
-}
+
 
 a.link-footer:link{
     text-decoration: none;
@@ -115,9 +156,9 @@ a.nav-link:any-link{
 #logo_centro {
 	width: 300px;
 	height: 130px;
-	margin-left: -150px; /* metade da largura */
-	margin-top: -85px; /* metade da altura */
+	margin-left: -150px; /* metade da largura 
+	margin-top: -85px; /* metade da altura 
 	position: absolute !important;
 	top: 50% !important;
 	left: 50% !important;
-}
+} */

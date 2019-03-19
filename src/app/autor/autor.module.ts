@@ -6,6 +6,7 @@ import { PesquisarAutorComponent } from './pesquisar-autor/pesquisar-autor.compo
 import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { AutorService } from './autor.service';
 import { CadastrarAutorComponent } from './cadastrar-autor/cadastrar-autor.component';
+import { ErrorMsgComponent } from '../shared/error-msg/error-msg.component';
 
 
 const ROUTES: Routes = [
@@ -19,12 +20,14 @@ const ROUTES: Routes = [
         AutorComponent,
         PesquisarAutorComponent,
         CadastrarAutorComponent
+        
     ],
     imports: [
         RouterModule.forChild(ROUTES),  
         FormsModule,
         ReactiveFormsModule,
         CommonModule],
+
   
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AutorService],
 

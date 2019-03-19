@@ -14,99 +14,107 @@ export class CadastrarAutorComponent implements OnInit {
 
   currentAction: string;
   titulo: string
-  autorForm: FormGroup;  
+  autorForm: FormGroup;
   @Input() autor: Autor = new Autor();
 
-  constructor(     
+  constructor(
     private autorService: AutorService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.setCurrentAction();
-    this.buildAutorForm();    
-    this.loadAutor();       
+    this.buildAutorForm();
+    this.loadAutor();
   }
 
-  ngAfterContentChecked(){
+  ngAfterContentChecked() {
 
   }
 
-  enviar(){
-    const dadosFormulario = this.autorForm.value 
+  enviar() {
+    const dadosFormulario = this.autorForm.value
 
     const autForm = new Autor(
       dadosFormulario.autSeqAutor,
       dadosFormulario.autNomeAutor,
       dadosFormulario.autDescricaoAutor
-    );  
+    );
 
-    if( this.route.snapshot.url[1].path == "new"){
-      
+    if (this.route.snapshot.url[0].path == "new") {
+
       const autor: Autor = Object.assign(new Autor(), this.autorForm.value);
 
       this.autorService.create(autor)
         .subscribe(
-          autor => this.actionsForSuccess(autor),
+          autor => this.actionsForSuccess(),
           //error => alert('Houve um erro!')     
-          error => this.actionsForError()     
+          error => this.actionsForError()
         );
-    }else{
-      const id =  this.route.snapshot.url[1].path
-      
+    } else {
+      const id = this.route.snapshot.url[1].path
+
       this.autorService.update(autForm).subscribe(
-        autor => this.actionsForSuccess(autor),
-        error => alert('Houve um erro!')     
+        () => this.actionsForSuccess(),
+        error => alert(`Houve um erro!${error}`)
       );
-    }    
-  }
-
-  //
-  private setCurrentAction(){
-    if( this.route.snapshot.url[1] != undefined){
-      if( this.route.snapshot.url[1].path == "new"){
-        this.currentAction = "new"
-        this.titulo = "Cadastrar Autor"
-      }else{
-        this.currentAction = "edit"
-        this.titulo = "Editar Autor"
-      }
-    }  
-  }
-
-  private buildAutorForm(){
-    this.autorForm = this.formBuilder.group({
-      autSeqAutor: this.formBuilder.control(''),
-      autNomeAutor: this.formBuilder.control(''),
-      autDescricaoAutor:  this.formBuilder.control('')
-    });
-  }
-
-  private loadAutor(){    
-    if(this.currentAction == "edit"){
-      this.route.paramMap.pipe(
-        switchMap(params => this.autorService.getById(+params.get("id")))
-      )
-      .subscribe(
-        (autor) => {
-          this.autor = autor;
-          this.autorForm.patchValue(autor)
-        },
-        (error) => alert('Ocorreu um erro')
-      )
     }
   }
 
-  private actionsForSuccess(autor: Autor){
+  //
+  private setCurrentAction() {
+    if (this.route.snapshot.url[1] == undefined && this.route.snapshot.url[0].path == "new") {
+      this.currentAction = "new"
+      this.titulo = "Cadastrar Autor"
+    } else {
+      this.currentAction = "edit"
+      this.titulo = "Editar Autor"
+    }
+
+  }
+
+  private buildAutorForm() {
+    this.autorForm = this.formBuilder.group({
+      autSeqAutor: this.formBuilder.control(''),
+      autNomeAutor: this.formBuilder.control(''),
+      autDescricaoAutor: this.formBuilder.control('')
+    });
+  }
+
+  private loadAutor() {
+    if (this.currentAction == "edit") {
+      this.route.paramMap.pipe(
+        switchMap(params => this.autorService.getById(+params.get("id")))
+      )
+        .subscribe(
+          (autor) => {
+            this.autor = autor;
+            this.autorForm.patchValue(autor)
+          },
+          (error) => alert('Ocorreu um erro')
+        )
+    }
+  }
+
+  private actionsForSuccess() {
     toastr.info("Operação realizada com sucesso!")
-    this.router.navigateByUrl("autor", {skipLocationChange: true}).then(
-      () => this.router.navigate(["autor", autor.autSeqAutor, "edit"])
+    this.router.navigateByUrl("autor", { skipLocationChange: true }).then(
+      () => this.router.navigate(["autor"])
     )
   }
 
-  private actionsForError(){
+  private actionsForError() {
     toastr.info("Houve um erro. Não foi possível realizar a operação!")
+  }
+
+  delete(id: number) {
+    if (confirm("Deseje excluir este autor?")) {
+      this.autorService.delete(id)
+        .subscribe(
+          () => this.actionsForSuccess()
+        )
+    }
   }
 }

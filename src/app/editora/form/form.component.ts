@@ -51,7 +51,7 @@ export class FormComponent implements OnInit {
 
       this.editoraService.create(editora)
         .subscribe(
-          editora => this.actionsForSuccess(editora),
+          editora => this.actionsForSuccess(),
           //error => alert('Houve um erro!')     
           error => this.actionsForError()     
         );
@@ -59,7 +59,7 @@ export class FormComponent implements OnInit {
       const id =  this.route.snapshot.url[0].path
       
       this.editoraService.update(edtForm).subscribe(
-        editora => this.actionsForSuccess(editora),
+        editora => this.actionsForSuccess(),
         error => alert('Houve um erro!')     
       );
     }    
@@ -73,7 +73,7 @@ export class FormComponent implements OnInit {
         this.titulo = "Cadastrar Editora"
       }else{
         this.currentAction = "edit"
-        this.titulo = "Editar Editora"
+        this.titulo = "Alterar Editora"
       }
     }  
 
@@ -103,14 +103,31 @@ export class FormComponent implements OnInit {
     }
   }
 
-  private actionsForSuccess(editora: Editora){
+  // toastr.info("Operação realizada com sucesso!")
+  //   this.router.navigateByUrl("autor", { skipLocationChange: true }).then(
+  //     () => this.router.navigate(["autor"])
+  //   )
+
+  private actionsForSuccess(){
     toastr.info("Operação realizada com sucesso!")
     this.router.navigateByUrl("editora", {skipLocationChange: true}).then(
-       () => this.router.navigate(["editora", editora.edtSeqEditora, "edit"])
+       () => this.router.navigate(["editora"])
     )
   }
 
   private actionsForError(){
     toastr.info("Houve um erro. Não foi possível realizar a operação!")
+  }
+
+  delete(id: number){
+
+    if (confirm("Deseje excluir esta Editora?")){
+      this.editoraService.delete(id)
+      .subscribe(
+        //autor => this.pesquisar(),
+        autor => this.actionsForSuccess(),
+        error => alert('Houve um erro!')
+      )
+    }    
   }
 }

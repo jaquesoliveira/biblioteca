@@ -25,13 +25,15 @@ export class PesquisarAutorComponent implements OnInit {
 
   ngOnInit() {
     this.buildAutorForm();
-    this.pesquisar();
+    this.filtrar();
+    //this.pesquisar();
   }
 
   pesquisar(){
     this.autorService.getAll().subscribe(
       autores => this.autores = autores,
-      error => alert('Houve um erro!')      
+      error => toastr.error("Houve um erro! Não foi pessível pesquisar")
+      //error => alert('Houve um erro!')      
     )
   }
 
@@ -41,7 +43,8 @@ export class PesquisarAutorComponent implements OnInit {
 
     this.autorService.filtrar(autor).subscribe(
       autores => this.autores = autores,
-      error => alert('Houve um erro!')     
+      error => toastr.error("Houve um erro! Não foi pessível pesquisar")
+      //error => alert('Houve um erro!')     
     );
   }
 
@@ -52,7 +55,8 @@ export class PesquisarAutorComponent implements OnInit {
       .subscribe(
         // autor => this.pesquisar(),
         autor => this.actionsForSuccess(),
-        error => alert('Houve um erro!')
+        toastr.error("Houve um erro")
+        //error => alert('Houve um erro!')
       )
     }    
   }

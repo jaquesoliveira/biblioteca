@@ -10,12 +10,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { EditoraComponent } from './editora/editora.component';
 import { HomeComponent } from './home/home.component';
+import { ErrorMsgComponent } from './shared/error-msg/error-msg.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,   
-    HomeComponent
+    HomeComponent, ErrorMsgComponent
   ],
   imports: [
     BrowserModule,

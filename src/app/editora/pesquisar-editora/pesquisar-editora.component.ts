@@ -34,7 +34,7 @@ export class PesquisarEditoraComponent implements OnInit {
     )
   }
 
-  filtrar(){    
+  filtrar(){
 
     const editora: Editora = Object.assign(new Editora(), this.editoraFormPesquisa.value);
 
@@ -71,7 +71,7 @@ export class PesquisarEditoraComponent implements OnInit {
 
   private buildEditoraForm(){
     this.editoraFormPesquisa = this.formBuilder.group({
-      nome: this.formBuilder.control('')
+      edtNomeEditora: this.formBuilder.control('')
     });
   }
 }
