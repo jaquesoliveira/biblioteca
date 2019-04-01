@@ -3,20 +3,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, from, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
-import { Autor } from './autor.model';
 import { element } from '@angular/core/src/render3';
 
 //import {ROOT_PATH} from '../app.api';
 import { environment } from 'src/environments/environment';
+import { Livro } from './Livro.model';
+
+
 
 const httpOptions = {
     headers: new HttpHeaders(
         {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : '*',
-            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-        }
+            'Content-Type': 'application/json'
+            ,'Access-Control-Allow-Origin': '*'  
+        }//
     ),
     body: null
   };
@@ -24,23 +24,24 @@ const httpOptions = {
 @Injectable({
     providedIn: 'root',
   })
-export class AutorService{
-    private apiPath: string = "rest/autores"
+export class LivroService{
+    private apiPath: string = "rest/livros"
     
     constructor(private http: HttpClient){}
 
+    getAll(): Observable<Livro[]>{
+        
 
-    getAll(): Observable<Autor[]>{        
-
-        return this.http.get<Autor[]>(`${environment.apiUrl}/${this.apiPath}`)
+        return this.http.get<Livro[]>(`${environment.apiUrl}/${this.apiPath}`)
         .pipe(catchError(
             this.handlerError),
             map(this.jsonDataToAutores)
         )
     }
+
     
 
-    getById(id: number): Observable<Autor>{
+    getById(id: number): Observable<Livro>{
         const url = `${environment.apiUrl}/${this.apiPath}/${id}`
 
         return this.http.get(url)
@@ -50,7 +51,7 @@ export class AutorService{
         )
     }
 
-    create(autor: Autor): Observable<Autor> {
+    create(autor: Livro): Observable<Livro> {
 
         return this.http.post(`${environment.apiUrl}/${this.apiPath}`, autor, httpOptions)
         .pipe(catchError(
@@ -59,7 +60,7 @@ export class AutorService{
         )
     }
 
-    filtrar(autor: Autor): Observable<Autor[]>{
+    filtrar(autor: Livro): Observable<Livro[]>{
 
         return this.http.post(`${environment.apiUrl}/${this.apiPath}/filtrar`,  autor, httpOptions)
         .pipe(catchError(
@@ -68,11 +69,11 @@ export class AutorService{
         )
     }
 
-    update(autor: Autor): Observable<Autor> {
+    update(livro: Livro): Observable<Livro> {
 
-        const url = `${environment.apiUrl}/${this.apiPath}/${autor.autSeqAutor}`
+        const url = `${environment.apiUrl}/${this.apiPath}/${livro}`
 
-        return this.http.put<Autor>(url, autor)
+        return this.http.put<Livro>(url, livro)
         .pipe(catchError(
             this.handlerError), 
             map(this.jsonDataToAutor)
@@ -89,17 +90,18 @@ export class AutorService{
         )
     }
 
-    private jsonDataToAutores(jsonData: any[]): Autor[]{
-        const autores: Autor[] = [];
-        jsonData.forEach(element => autores.push(element as Autor))
+    private jsonDataToAutores(jsonData: any[]): Livro[]{
+        const autores: Livro[] = [];
+        jsonData.forEach(element => autores.push(element as Livro))
         return autores;
     }
 
     private handlerError(error: any): Observable<any>{
+        //console.log(error);
         return throwError(error.error);
     }
 
-    private jsonDataToAutor(jsonData: any): Autor{
-        return jsonData as Autor;
+    private jsonDataToAutor(jsonData: any): Livro{
+        return jsonData as Livro;
     }
 }

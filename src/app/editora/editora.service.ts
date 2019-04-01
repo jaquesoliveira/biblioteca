@@ -8,9 +8,11 @@ import { environment } from 'src/environments/environment';
 const httpOptions = {
   headers: new HttpHeaders(
       {
-          'Content-Type': 'application/json'
-          ,'Access-Control-Allow-Origin': '*'  
-      }//
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+      }
   ),
   body: null
 };
@@ -88,13 +90,13 @@ export class EditoraService{
     private jsonDataToEditoras(jsonData: any[]): Editora[]{
         const editoras: Editora[] = [];
         jsonData.forEach(element => editoras.push(element as Editora))
-        console.log(editoras)
+        //console.log(editoras)
         return editoras;
     }
 
     private handlerError(error: any): Observable<any>{
-        console.log(error);
-        return throwError(error);
+        //console.log(error);
+        return throwError(error.error);
     }
 
     private jsonDataToEditora(jsonData: any): Editora{

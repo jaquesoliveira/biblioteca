@@ -1,48 +1,51 @@
+
+
 <div class="mt-5 mb-5" style="position:relative; top: 40px">
   <div class="position:relative">
     <nav class="navbar fixed-top  navbar-dark bg-primary text-center">
       <a class="btn btn-primary" href="#">
         <i class="fas fa-arrow-left"></i>
       </a>
-      <a class="btn" href="#" style="color:white">
+      <a class="btn" [routerLink]="['/autor']" style="color:white">
         Autores
       </a>
-      <a href="" class="btn">
-        &nbsp; &nbsp; &nbsp;
+      <a class="btn btn-primary"  [routerLink]="['new']">
+        <i class="fas fa-plus"></i>
       </a>     
     </nav>      
   </div>
   <div class="row p-2" style="top:250px;">
     <nav class="nav justify-content-center fixed-top navbar-dark p-2 mt-0" style="top:54px;  background-color: #e3f2fd;">     
       <form [formGroup]="autorFormPesquisa" style="width:100%;" novalidate>        
-        <input type="search" formControlName="autNomeAutor" class="form-control text-capitalize" placeholder="Nome do autor">        
+        <input type="search" formControlName="autNomeAutor" 
+          class="form-control text-capitalize" placeholder="Nome do autor"
+          (keyup.enter)="onEnter()" >
       </form>
     </nav>    
   </div>
   <ul class="list-group list-group-flush" *ngFor="let autor of autores">
     <a [routerLink]="[autor.autSeqAutor, 'edit']" style="text-decoration: none; ">
-      <li class="list-group-item text-capitalize">{{autor.autNomeAutor}} </li>
+      <li class="list-group-item text-capitalize">{{autor.autNomeAutor}} 
+       
+      </li>
     </a>
   </ul>
   <div *ngIf="autores.length === 0">
+    <br>
     <p class="text-center">Nenhum autor foi encontrado</p>
   </div>
-
   <br>
 </div>
-
+<!-- 
 <nav class="navbar fixed-bottom  navbar-dark bg-primary nav-bottom">
 
-  <button type="button" (click)="filtrar()" title="Adicionar autor" class="btn btn-sm btn-primary  mr-1">
+  <span style="color:white">Total de autores: {{autores.length}}</span> -->
+  <!-- <button type="button" (click)="filtrar()" title="Adicionar autor" class="btn btn-sm btn-primary  mr-1">
     <i class="fas fa-search"></i>
     Pesquisar
   </button>
   <button type="button" (click)="limpar()" class="btn btn-sm btn-primary mr-1">
     <i class="fas fa-eraser"></i>
     Limpar
-  </button>
-  <button type="button" [routerLink]="['new']" class="btn btn-primary btn-sm">
-    <i class="fas fa-plus"></i>
-    Adicionar
-  </button>
-</nav>
+  </button> -->
+<!-- </nav> -->

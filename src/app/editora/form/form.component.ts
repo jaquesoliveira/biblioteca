@@ -53,7 +53,7 @@ export class FormComponent implements OnInit {
         .subscribe(
           editora => this.actionsForSuccess(),
           //error => alert('Houve um erro!')     
-          error => this.actionsForError()     
+          error => this.actionsForError(error)     
         );
     }else{
       const id =  this.route.snapshot.url[0].path
@@ -77,7 +77,7 @@ export class FormComponent implements OnInit {
       }
     }  
 
-    console.log(this.currentAction)
+    //console.log(this.currentAction)
   }
 
   private buildEditoraForm(){
@@ -115,8 +115,9 @@ export class FormComponent implements OnInit {
     )
   }
 
-  private actionsForError(){
-    toastr.info("Houve um erro. Não foi possível realizar a operação!")
+  private actionsForError(error){
+    console.log(error)
+    toastr.error(error)
   }
 
   delete(id: number){

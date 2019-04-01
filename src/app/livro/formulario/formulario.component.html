@@ -1,0 +1,109 @@
+<div class="mt-5" style="position:relative; top: 20px">
+  <div>
+    <nav class="navbar fixed-top  navbar-dark bg-primary text-center">
+      <a class="btn btn-primary" [routerLink]="['/livro']">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <a class="btn" href="#" style="color:white">
+        {{titulo}}
+      </a>
+      <a [routerLink]="['/livro/new']" class="btn btn-primary" (click)="enviar()">
+        <i class="fas fa-check"></i>
+      </a>
+    </nav>
+  </div>
+
+  <form [formGroup]="livroForm" novalidate>
+    <div class="form-group d-none">
+      <input type="number" formControlName="livSeqLivro" class="form-control" placeholder="Código" readonly>
+    </div>
+
+    <div class="form-group col-sm-12 ">
+      <input type="text" formControlName="livCodBarrasLivro" class="form-control text-capitalize" placeholder="Código barras">
+    </div>
+
+    <div class="form-group col-sm-12 ">
+      <input type="text" formControlName="livTitulo" class="form-control text-capitalize" placeholder="Titulo">
+    </div>
+   
+    <div class="form-group col-sm-12 ">
+      <textarea rows="4" cols="50" formControlName="livDscLivro" class="form-control" placeholder="Descrição"></textarea>
+    </div>
+
+    <div class="form-group col-sm-12 ">
+      <input type="text" formControlName="livAnoEdicaoLivro" class="form-control text-capitalize" placeholder="Ano publicação">
+    </div>
+
+    <div class="form-group col-sm-12 ">
+      <input type="text" formControlName="edtSeqEditora" class="form-control text-capitalize" placeholder="Editora">
+    </div>
+
+    <div class="form-group col-sm-12 ">
+      <select type="text" formControlName="ctlSeqCategoriaLivro" class="form-control text-capitalize" placeholder="Categoria">
+        </select>
+    </div>
+
+    <div class="form-group col-sm-12 ">
+        <input type="text" formControlName="livFlgLido" class="form-control text-capitalize" placeholder="Lido?">
+      </div>
+
+      <div class="form-group col-sm-12 ">
+          <input type="text" formControlName="livFlgLiteraturaEstrangeira" class="form-control text-capitalize" placeholder="Literatura estrangeira">
+        </div>
+
+        <div class="form-group col-sm-12 ">
+            <input type="text" formControlName="livPaginasLivro" class="form-control text-capitalize" placeholder="Páginas">
+          </div>
+
+    <div class="form-group col-sm-12 ">
+        <select type="text" formControlName="lstAutor" class="form-control text-capitalize" placeholder="Categoria">
+          </select>
+      </div>
+
+  </form>
+  <!-- 
+<div class="card mt-3 mb-3">  
+  <div class="card-header">
+    {{titulo}}
+  </div>
+
+  <div class="card-body">
+    <form [formGroup]="editoraForm" novalidate>
+      <div class="form-group col-2  d-none">
+        <input type="number" formControlName="edtSeqEditora" class="form-control" placeholder="Código" readonly>
+      </div>
+
+      <div class="form-group col-sm-12 row">
+        <input type="text" formControlName="edtNomeEditora" class="form-control" placeholder="Nome">
+      </div>
+
+      <div class="form-group col-sm-12 row">
+        <textarea rows="4" cols="50" formControlName="edtDscEditora" class="form-control" placeholder="Descrição"></textarea>
+      </div>
+    </form>
+  </div>
+
+  <div class="card-footer text-muted">
+    <div class="form-group col-sm-12 row">
+      <button (click)="enviar()" class="btn btn-sm btn-primary">
+        Salvar
+      </button>&nbsp;
+
+      <button [routerLink]="['/editora']" class="btn btn-sm btn-danger">
+        Cancelar
+      </button>&nbsp;
+      <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-secondary" title="Excluir">Excluir</button>
+    </div>
+  </div>
+</div> -->
+<br><br>
+</div>
+<nav class="navbar fixed-bottom navbar-dark bg-primary nav-bottom">
+  <span>
+    &nbsp;
+  </span>
+  <!-- <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-primary" title="Excluir">
+    <i class="fas fa-trash-alt"></i>
+    Excluir
+  </button> -->
+</nav>

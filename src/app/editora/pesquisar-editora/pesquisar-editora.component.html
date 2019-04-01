@@ -4,35 +4,38 @@
       <a class="btn btn-primary" href="#">
         <i class="fas fa-arrow-left"></i>
       </a>
-      <a class="btn" href="#" style="color:white">
+      <a class="btn"  [routerLink]="['/editora']" style="color:white">
         Editoras
       </a>
-      <a class="btn" href="">
-          &nbsp; &nbsp; &nbsp;
+      <a class="btn btn-primary" [routerLink]="['new']">
+        <i class="fas fa-plus"></i>        
       </a>
-    </nav>   
+    </nav>
   </div>
   <div class="row p-2" style="top:250px;">
     <nav class="nav justify-content-center fixed-top navbar-dark p-2 mt-0" style="top:54px;  background-color: #e3f2fd;">
-      <form [formGroup]="editoraFormPesquisa"  style="width:100%;" novalidate>    
-        <input type="search" formControlName="edtNomeEditora" class="form-control" placeholder="Nome da editora">
+      <form [formGroup]="editoraFormPesquisa"  style="width:100%;" novalidate>
+        <input type="search" formControlName="edtNomeEditora" class="form-control text-capitalize" 
+          placeholder="Nome da editora" (keyup.enter)="onEnter()" >
       </form>
-    </nav>    
+    </nav>
   </div>
   <ul class="list-group list-group-flush" *ngFor="let editora of editoras">
     <a [routerLink]="[editora.edtSeqEditora, 'edit']" style="text-decoration: none; ">
-      <li class="list-group-item">{{editora.edtNomeEditora}} </li>
+      <li class="list-group-item text-capitalize">{{editora.edtNomeEditora}} </li>
     </a>
   </ul>
   <div *ngIf="editoras.length === 0">
-    <p class="text-center">Nenhuma editora foi encontrado</p>
+    <br>
+    <p class="text-center">Nenhuma editora foi encontrada</p>
   </div>
 </div>
 <br><br>
 
-<nav class="navbar fixed-bottom navbar-dark bg-primary  nav-bottom">
+<!-- <nav class="navbar fixed-bottom navbar-dark bg-primary  nav-bottom">
+    <span style="color:white">Total de autores: {{editoras.length}}</span> -->
 
-  <button type="button" (click)="filtrar()" class="btn btn-sm btn-primary">
+  <!-- <button type="button" (click)="filtrar()" class="btn btn-sm btn-primary">
     <i class="fas fa-search"></i>
     Pesquisar
   </button>
@@ -40,10 +43,10 @@
   <button type="button" (click)="limpar()" class="btn btn-sm btn-primary mr-1 ">
     <i class="fas fa-eraser"></i>
     Limpar
-  </button>
+  </button> -->
 
-  <button type="button" [routerLink]="['new']" class="btn btn-sm btn-primary mr-1">
+  <!-- <button type="button" [routerLink]="['new']" class="btn btn-sm btn-primary mr-1">
     <i class="fas fa-plus"></i>
     Adicionar
-  </button>
-</nav>
+  </button> -->
+<!-- </nav> -->

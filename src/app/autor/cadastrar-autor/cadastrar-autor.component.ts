@@ -51,10 +51,10 @@ export class CadastrarAutorComponent implements OnInit {
         .subscribe(
           autor => this.actionsForSuccess(),
           //error => alert('Houve um erro!')     
-          error => this.actionsForError()
+          error => this.actionsForError(error)
         );
     } else {
-      const id = this.route.snapshot.url[1].path
+      const id = this.route.snapshot.url[0].path
 
       this.autorService.update(autForm).subscribe(
         () => this.actionsForSuccess(),
@@ -65,9 +65,9 @@ export class CadastrarAutorComponent implements OnInit {
 
   //
   private setCurrentAction() {
-    if (this.route.snapshot.url[1] == undefined && this.route.snapshot.url[0].path == "new") {
+    if (this.route.snapshot.url[0].path == "new") {
       this.currentAction = "new"
-      this.titulo = "Cadastrar Autor"
+      this.titulo = "Novo Autor"
     } else {
       this.currentAction = "edit"
       this.titulo = "Editar Autor"
@@ -105,8 +105,8 @@ export class CadastrarAutorComponent implements OnInit {
     )
   }
 
-  private actionsForError() {
-    toastr.info("Houve um erro. Não foi possível realizar a operação!")
+  private actionsForError(error) {
+    toastr.error(error)
   }
 
   delete(id: number) {

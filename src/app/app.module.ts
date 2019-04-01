@@ -11,6 +11,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { EditoraComponent } from './editora/editora.component';
 import { HomeComponent } from './home/home.component';
 import { ErrorMsgComponent } from './shared/error-msg/error-msg.component';
+import { LivroComponent } from './livro/livro.component';
 
 
 @NgModule({

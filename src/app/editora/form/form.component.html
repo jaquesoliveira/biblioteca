@@ -1,14 +1,14 @@
 <div class="mt-5" style="position:relative; top: 20px">
   <div>
     <nav class="navbar fixed-top  navbar-dark bg-primary text-center">
-      <a class="btn btn-primary"  [routerLink]="['/editora']">
+      <a class="btn btn-primary" [routerLink]="['/editora']">
         <i class="fas fa-arrow-left"></i>
       </a>
       <a class="btn" href="#" style="color:white">
         {{titulo}}
       </a>
-      <a  class="btn" >
-        &nbsp; &nbsp; &nbsp;
+      <a [routerLink]="['/editora/new']" class="btn btn-primary" (click)="enviar()">
+        <i class="fas fa-check"></i>
       </a>
     </nav>
   </div>
@@ -18,11 +18,11 @@
       <input type="number" formControlName="edtSeqEditora" class="form-control" placeholder="Código" readonly>
     </div>
 
-    <div class="form-group col-sm-12 row">
-      <input type="text" formControlName="edtNomeEditora" class="form-control" placeholder="Nome">
+    <div class="form-group col-sm-12 ">
+      <input type="text" formControlName="edtNomeEditora" class="form-control text-capitalize" placeholder="Nome">
     </div>
 
-    <div class="form-group col-sm-12 row">
+    <div class="form-group col-sm-12 ">
       <textarea rows="4" cols="50" formControlName="edtDscEditora" class="form-control" placeholder="Descrição"></textarea>
     </div>
   </form>
@@ -63,13 +63,11 @@
 </div> -->
 </div>
 <nav class="navbar fixed-bottom navbar-dark bg-primary nav-bottom">
-  <button (click)="enviar()" class="btn btn-sm btn-primary mr-1">
-    <i class="fas fa-save"></i>
-    Salvar
-  </button>
-
-  <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-primary" title="Excluir">
-      <i class="fas fa-trash-alt"></i>
+  <span>
+    &nbsp;
+  </span>
+  <!-- <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-primary" title="Excluir">
+    <i class="fas fa-trash-alt"></i>
     Excluir
-  </button>
+  </button> -->
 </nav>

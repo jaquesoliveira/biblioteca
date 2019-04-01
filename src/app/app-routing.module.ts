@@ -5,7 +5,8 @@ import { HomeComponent } from './home/home.component';
 const routes: Routes = [  
   {path: '', component: HomeComponent},
   {path: 'autor', loadChildren: './autor/autor.module#AutorModule'},
-  {path: 'editora', loadChildren: './editora/editora.module#EditoraModule'}  
+  {path: 'editora', loadChildren: './editora/editora.module#EditoraModule'},
+  {path: 'livro', loadChildren: './livro/livro.module#LivroModule'}  
 ];
 
 @NgModule({

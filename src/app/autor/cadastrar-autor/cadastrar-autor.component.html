@@ -4,18 +4,18 @@
       <a class="btn btn-primary" [routerLink]="['/autor']">
         <i class="fas fa-arrow-left"></i>
       </a>
-      <a class="btn" href="#" style="color:white">
-        Autores
+      <a class="btn" [routerLink]="['/autor']" style="color:white">
+        {{titulo}}
       </a>
-      <a href="" class="btn">
-        &nbsp; &nbsp; &nbsp;
+      <a [routerLink]="['/autor/new']" class="btn btn-primary" (click)="enviar()" >
+        <i class="fas fa-check"></i>
       </a>
     </nav>
   </div>
 
   <form [formGroup]="autorForm" novalidate>
     <div class="form-group col-2 d-none">
-      <input type="number" formControlName="autSeqAutor" class="form-control" placeholder="Código" readonly>
+      <input type="number" formControlName="autSeqAutor" class="form-control" placeholder="Código" ng-enter="" readonly>
     </div>
 
     <div class="form-group col-sm-12">
@@ -28,11 +28,14 @@
   </form>
 
   <nav class="navbar fixed-bottom  navbar-dark bg-primary nav-bottom">
-    <button (click)="enviar()" class="btn btn-sm btn-primary">
+    <!-- <button (click)="enviar()" class="btn btn-sm btn-primary">
       <i class="fas fa-save"></i>
-      Salvar</button>
-    <button (click)="delete(autor.autSeqAutor)" *ngIf="autor.autSeqAutor" class="btn btn-sm btn-primary" title="Excluir">
+      Salvar</button> -->
+      <span>
+          &nbsp;
+        </span>
+    <!-- <button (click)="delete(autor.autSeqAutor)" *ngIf="autor.autSeqAutor" class="btn btn-sm btn-primary" title="Excluir">
       <i class="fas fa-trash-alt"></i>
       Excluir
-    </button>
+    </button> -->
   </nav>

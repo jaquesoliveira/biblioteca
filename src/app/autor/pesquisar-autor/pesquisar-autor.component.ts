@@ -29,6 +29,10 @@ export class PesquisarAutorComponent implements OnInit {
     //this.pesquisar();
   }
 
+  onEnter(){
+    this.filtrar()
+  }
+
   pesquisar(){
     this.autorService.getAll().subscribe(
       autores => this.autores = autores,

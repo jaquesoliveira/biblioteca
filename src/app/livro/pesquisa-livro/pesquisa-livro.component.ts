@@ -1,29 +1,28 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Editora } from '../editora.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Livro } from '../Livro.model';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { EditoraService } from '../editora.service';
+import { LivroService } from '../livro.service';
 import toastr from 'toastr';
 
 @Component({
-  selector: 'app-pesquisar-editora',
-  templateUrl: './pesquisar-editora.component.html'
+  selector: 'app-pesquisa-livro',
+  templateUrl: './pesquisa-livro.component.html',
+  styleUrls: ['./pesquisa-livro.component.css']
 })
+export class PesquisaLivroComponent implements OnInit {
 
-export class PesquisarEditoraComponent implements OnInit {
+  @Input() editora: Livro = new Livro();
+  livroFormPesquisa: FormGroup;
 
-  @Input() editora: Editora = new Editora();
-  editoraFormPesquisa: FormGroup;
-
-  editoras: Editora[] = []
+  livros: Livro[] = []
 
   constructor(
-    private editoraService: EditoraService,
+    private editoraService: LivroService,
     private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
-    this.buildEditoraForm();
+    this.buildLivroForm();
     this.pesquisar();  
   }
 
@@ -33,24 +32,24 @@ export class PesquisarEditoraComponent implements OnInit {
 
   pesquisar(){
     this.editoraService.getAll().subscribe(
-      editoras => this.editoras = editoras,
+      livros => this.livros = livros,
       error => this.actionsForError(error)      
     )
   }
 
   filtrar(){
 
-    const editora: Editora = Object.assign(new Editora(), this.editoraFormPesquisa.value);
+    const editora: Livro = Object.assign(new Livro(), this.livroFormPesquisa.value);
 
     this.editoraService.filtrar(editora).subscribe(
-      editoras => this.editoras = editoras,
+      livros => this.livros = livros,
       error => this.actionsForError(error)  
     );
   }
 
   delete(id: number){
 
-    if (confirm("Deseje excluir esta Editora?")){
+    if (confirm("Deseje excluir esta Livro?")){
       this.editoraService.delete(id)
       .subscribe(
         //autor => this.pesquisar(),
@@ -73,13 +72,14 @@ export class PesquisarEditoraComponent implements OnInit {
   }
 
   limpar(){
-    //this.editoras = []
-    this.buildEditoraForm();
+    //this.livros = []
+    this.buildLivroForm();
   }
 
-  private buildEditoraForm(){
-    this.editoraFormPesquisa = this.formBuilder.group({
-      edtNomeEditora: this.formBuilder.control('')
+  private buildLivroForm(){
+    this.livroFormPesquisa = this.formBuilder.group({
+      livTitulo: this.formBuilder.control('')
     });
   }
+
 }

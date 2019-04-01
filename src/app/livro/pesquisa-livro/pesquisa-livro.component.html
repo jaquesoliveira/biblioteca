@@ -1,0 +1,58 @@
+<div class="mt-5 mb-5" style="position:relative; top: 50px">
+  <div class="position:relative">
+    <nav class="navbar fixed-top  navbar-dark bg-primary text-center">
+      <a class="btn btn-primary" href="#">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <a class="btn" [routerLink]="['/livro']" style="color:white">
+        Livros
+      </a>
+      <a class="btn btn-primary" [routerLink]="['new']">
+        <i class="fas fa-plus"></i>
+      </a>
+    </nav>
+  </div>
+  <div class="row p-2" style="top:250px;">
+    <nav class="nav justify-content-center fixed-top navbar-dark p-2 mt-0"
+      style="top:54px;  background-color: #e3f2fd;">
+      <form [formGroup]="livroFormPesquisa" style="width:100%;" novalidate>
+        <input type="search" formControlName="livTitulo" class="form-control text-capitalize"
+          placeholder="Titulo do livro" (keyup.enter)="onEnter()">
+      </form>
+    </nav>
+  </div>
+  <ul class="list-group list-group-flush mt-1" *ngFor="let livro of livros">
+    <a [routerLink]="[livro.livSeqLivro, 'edit']" style="text-decoration: none; ">
+      <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1  text-capitalize"> {{livro.livTitulo}} </h5>
+      </div>
+      <p class="mb-1"><strong>Resumo: </strong>{{livro.livDscLivro}}</p>
+
+      <div class="row">
+
+
+        <div class="col-lg-4">
+          <small><strong>Cód. Barras: </strong> {{livro.livCodBarrasLivro}} </small>
+        </div>
+        <div class="col-lg-4">
+          <small *ngFor="let autor of livro.lstAutor"><strong>Autor: </strong>{{autor.autNomeAutor}} </small>
+        </div>
+        <div class="col-lg-4">
+          <small><strong>Editora: </strong>{{livro.edtSeqEditora.edtNomeEditora}} </small>
+        </div>
+      </div>
+      <hr>
+
+
+    </a>
+  </ul>
+  <div *ngIf="livros.length === 0">
+    <br>
+    <p class="text-center">Nenhum autor foi encontrado</p>
+  </div>
+  <br>
+</div>
+
+<nav class="navbar fixed-bottom  navbar-dark bg-primary nav-bottom">
+  <span style="color:white">Total de livros:</span>
+</nav>
