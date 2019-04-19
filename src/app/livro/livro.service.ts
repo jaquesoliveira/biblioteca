@@ -26,6 +26,7 @@ const httpOptions = {
   })
 export class LivroService{
     private apiPath: string = "rest/livros"
+    private apiIsbn: string = "https://www.googleapis.com/books/v1/volumes?q=isbn:"
     
     constructor(private http: HttpClient){}
 
@@ -71,13 +72,16 @@ export class LivroService{
 
     update(livro: Livro): Observable<Livro> {
 
-        const url = `${environment.apiUrl}/${this.apiPath}/${livro}`
+        const url = `${environment.apiUrl}/${this.apiPath}/${livro.livSeqLivro}`
 
-        return this.http.put<Livro>(url, livro)
-        .pipe(catchError(
-            this.handlerError), 
-            map(this.jsonDataToAutor)
-        )
+        //console.log(livro);
+
+         return this.http.put<Livro>(url, livro)
+         .pipe(catchError(
+             this.handlerError), 
+             map(this.jsonDataToAutor)
+         )
+       // return null;
     }
 
     delete(id: number): Observable<any>{
@@ -88,6 +92,19 @@ export class LivroService{
             this.handlerError),
             map(() => null)
         )
+    }
+
+    pesquisarPorIsbn(barCode: string): Observable<any>{
+        console.log(`Barcode: ${this.apiIsbn}${barCode}`);
+        const pathIsbn = `${this.apiIsbn}${barCode}`
+
+        return this.http.get(pathIsbn);        
+    }
+
+    pesquisarPorIsbnDetalhe(selfLink: string): Observable<any>{
+        console.log(`Selflink: ${selfLink}`);
+        const pathIsbn = selfLink
+        return this.http.get(pathIsbn);        
     }
 
     private jsonDataToAutores(jsonData: any[]): Livro[]{
@@ -102,6 +119,6 @@ export class LivroService{
     }
 
     private jsonDataToAutor(jsonData: any): Livro{
-        return jsonData as Livro;
+        return Object.assign(new Livro(), jsonData) //jsonData as Livro;
     }
 }

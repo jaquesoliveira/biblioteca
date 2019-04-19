@@ -4,6 +4,10 @@ html, body, nav{
     margin-right: auto;
 }
 
+/* body, input, textarea{
+    font-size: 12px !important;
+} */
+
 .myFooter{
     background-color: rgb(153, 151, 151);
     position: fixed;

@@ -6,6 +6,7 @@ import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/c
 import { FormularioComponent } from './formulario/formulario.component';
 import { PesquisaLivroComponent } from './pesquisa-livro/pesquisa-livro.component';
 import { LivroService } from './livro.service';
+import { NgAutoCompleteModule } from 'ng-auto-complete';
 
 
 const ROUTES: Routes = [
@@ -18,13 +19,13 @@ const ROUTES: Routes = [
     declarations:[
         LivroComponent,
         FormularioComponent,
-        PesquisaLivroComponent
-
+        PesquisaLivroComponent      
     ],
     imports: [
         RouterModule.forChild(ROUTES),  
         FormsModule,
         ReactiveFormsModule,
+        NgAutoCompleteModule,
         CommonModule],
 
   

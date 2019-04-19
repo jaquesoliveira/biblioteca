@@ -9,11 +9,11 @@ export class Livro{
         public livTitulo?: string,
         public livDscLivro?: string,
         public livAnoEdicaoLivro?: string,
-        public edtSeqEditora?: Editora,
-        public ctlSeqCategoriaLivro?: Editora,        
-        public flgLido?: boolean,
-        public livFlgLiteraturaEstrangeira?: number,
-        public livPaginasLivro?: boolean,
+        public livEditora?: string,
+        public ctlSeqCategoriaLivro?: Number,        
+        public livFlgLido?: boolean,
+        public livFlgLiteraturaEstrangeira?: boolean,
+        public livPaginasLivro?: number,
         public lstAutor?: Autor[]
         ){}
 }

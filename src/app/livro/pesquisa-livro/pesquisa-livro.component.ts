@@ -23,7 +23,8 @@ export class PesquisaLivroComponent implements OnInit {
 
   ngOnInit() {
     this.buildLivroForm();
-    this.pesquisar();  
+    //this.pesquisar();
+    this.filtrar()  
   }
 
   onEnter(){
@@ -81,5 +82,4 @@ export class PesquisaLivroComponent implements OnInit {
       livTitulo: this.formBuilder.control('')
     });
   }
-
 }

@@ -12,6 +12,7 @@ import { EditoraComponent } from './editora/editora.component';
 import { HomeComponent } from './home/home.component';
 import { ErrorMsgComponent } from './shared/error-msg/error-msg.component';
 import { LivroComponent } from './livro/livro.component';
+import {NgAutoCompleteModule} from "ng-auto-complete";
 
 
 @NgModule({
@@ -25,11 +26,13 @@ import { LivroComponent } from './livro/livro.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
+   
   ],
   exports:[BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgAutoCompleteModule,
     ReactiveFormsModule],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AutorService],
   bootstrap: [AppComponent]

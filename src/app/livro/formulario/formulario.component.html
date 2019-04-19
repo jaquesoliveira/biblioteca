@@ -7,103 +7,123 @@
       <a class="btn" href="#" style="color:white">
         {{titulo}}
       </a>
-      <a [routerLink]="['/livro/new']" class="btn btn-primary" (click)="enviar()">
+      <a [routerLink]="['/']" class="btn btn-primary" (click)="enviar()">
         <i class="fas fa-check"></i>
       </a>
     </nav>
   </div>
 
-  <form [formGroup]="livroForm" novalidate>
+  <form [formGroup]="livroForm" novalidate class="">
     <div class="form-group d-none">
       <input type="number" formControlName="livSeqLivro" class="form-control" placeholder="Código" readonly>
     </div>
 
-    <div class="form-group col-sm-12 ">
-      <input type="text" formControlName="livCodBarrasLivro" class="form-control text-capitalize" placeholder="Código barras">
+    <div class="form-group col-sm-12 col-lg-4 ">
+      <label for="idLivCodBarrasLivro">Código de barras</label>
+      <input id="idLivCodBarrasLivro" type="number" formControlName="livCodBarrasLivro"
+        class="form-control form-control-sm" placeholder="Código barras">
     </div>
 
-    <div class="form-group col-sm-12 ">
-      <input type="text" formControlName="livTitulo" class="form-control text-capitalize" placeholder="Titulo">
+    <div class="form-group col-sm-12 col-lg-4 ">
+      <button class="btn btn-primary" (click)="pesquisarIsbn()">
+        <i class="fas fa-barcode"></i> Pesquisar
+      </button>
     </div>
+    <hr>
+
+    <div class="form-group col-sm-12 col-lg-12 ">
+      <label for="idLivTitulo">Título</label>
+      <input id="idLivTitulo" type="text" formControlName="livTitulo"
+        class="form-control form-control-sm text-capitalize" placeholder="Titulo">
+    </div>
+
+    <div class="form-group col-lg-12 row mr-0">
+      <div class="form-group col-sm-12  col-lg-3">
+        <label for="idCtlSeqCategoriaLivro">Categoria</label>
+        <input id="idCtlSeqCategoriaLivro" type="text" formControlName="ctlSeqCategoriaLivro"
+          class="form-control form-control-sm text-capitalize col-sm-12 col-lg-12" 
+          placeholder="Categoria">
+      </div>
+
+      <div class="form-group col-sm-12 col-lg-3">
+        <label for="idLivPaginasLivro">Páginas</label>
+        <input type="text" formControlName="livPaginasLivro" class="form-control form-control-sm text-capitalize  col-sm-12 col-lg-12"
+          placeholder="Páginas">
+      </div>
+
+      <div class=" col-sm-12 col-lg-3 ">
+        <label for="idEdtSeqEditora">Editora</label>
+        <input type="text" formControlName="livEditora" 
+          class="form-control form-control-sm text-capitalize  col-sm-12 col-lg-12"
+          placeholder="Editora">
+      </div>
+
+      <div class="col-sm-12 col-lg-3">
+        <label for="idLivAnoEdicaoLivro">Ano publicação</label>
+        <input id="idLivAnoEdicaoLivro" type="text" formControlName="livAnoEdicaoLivro"
+          class="form-control form-control-sm col-sm-12 col-lg-12" 
+          placeholder="Ano publicação">
+      </div>
+    </div>
+    <div class="form-group col-lg-12 row">
+      <div class="form-group col-sm-12 col-lg-2">
+        <input id="idLivFlgLido" type="checkbox" formControlName="livFlgLido" class="ml-0 form-check-input">
+        <label class="form-check-label ml-3 " for="idLivFlgLido">Livro lido</label>
+      </div>
+
+      <div class="form-group col-sm-12 col-lg-2">
+        <input id="idLivFlgLiteraturaEstrangeira" type="checkbox" formControlName="livFlgLiteraturaEstrangeira"
+          class="ml-0 form-check-input">
+        <label class="form-check-label ml-3 " for="idLivFlgLiteraturaEstrangeira">Literatura estrangeira</label>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12">
    
+    <!-- <button class="btn btn-sm btn-primary" title="Excluir">
+        <i class="fas fa-plus"></i>             
+    </button> -->
+    <table class="table table-striped table-hover" >
+
+        <thead>
+            <td colspan="2">
+                Autor(es)
+            </td>
+        </thead>
+
+        <tr *ngFor="let autor of autores">
+          <td>          
+            {{autor.autNomeAutor}}          
+          </td>
+          <td>
+            <button class="btn btn-sm btn-danger float-right" title="Excluir">
+                <i class="fas fa-trash"></i>             
+            </button>
+          </td>
+        </tr>
+      </table>    
+  </div>
     <div class="form-group col-sm-12 ">
-      <textarea rows="4" cols="50" formControlName="livDscLivro" class="form-control" placeholder="Descrição"></textarea>
+      <label for="idLivDscLivro">Descrição</label>
+      <textarea id="idLivDscLivro" rows="4" cols="50" formControlName="livDscLivro" class="form-control form-control-sm"
+        placeholder="Descrição"></textarea>
     </div>
 
-    <div class="form-group col-sm-12 ">
-      <input type="text" formControlName="livAnoEdicaoLivro" class="form-control text-capitalize" placeholder="Ano publicação">
+    <!-- <div class="form-group col-sm-12 col-lg-4">
+      <select type="text" class="form-control form-control-sm text-capitalize" placeholder="Categoria">
+        <option value="" disabled>Choose a state</option>
+        <option *ngFor="let autSelected of todosOsAutores" [ngValue]="autSelected">
+          {{autSelected.autNomeAutor}}
+        </option>
+      </select>
     </div>
-
-    <div class="form-group col-sm-12 ">
-      <input type="text" formControlName="edtSeqEditora" class="form-control text-capitalize" placeholder="Editora">
-    </div>
-
-    <div class="form-group col-sm-12 ">
-      <select type="text" formControlName="ctlSeqCategoriaLivro" class="form-control text-capitalize" placeholder="Categoria">
-        </select>
-    </div>
-
-    <div class="form-group col-sm-12 ">
-        <input type="text" formControlName="livFlgLido" class="form-control text-capitalize" placeholder="Lido?">
-      </div>
-
-      <div class="form-group col-sm-12 ">
-          <input type="text" formControlName="livFlgLiteraturaEstrangeira" class="form-control text-capitalize" placeholder="Literatura estrangeira">
-        </div>
-
-        <div class="form-group col-sm-12 ">
-            <input type="text" formControlName="livPaginasLivro" class="form-control text-capitalize" placeholder="Páginas">
-          </div>
-
-    <div class="form-group col-sm-12 ">
-        <select type="text" formControlName="lstAutor" class="form-control text-capitalize" placeholder="Categoria">
-          </select>
-      </div>
+     -->
 
   </form>
-  <!-- 
-<div class="card mt-3 mb-3">  
-  <div class="card-header">
-    {{titulo}}
-  </div>
-
-  <div class="card-body">
-    <form [formGroup]="editoraForm" novalidate>
-      <div class="form-group col-2  d-none">
-        <input type="number" formControlName="edtSeqEditora" class="form-control" placeholder="Código" readonly>
-      </div>
-
-      <div class="form-group col-sm-12 row">
-        <input type="text" formControlName="edtNomeEditora" class="form-control" placeholder="Nome">
-      </div>
-
-      <div class="form-group col-sm-12 row">
-        <textarea rows="4" cols="50" formControlName="edtDscEditora" class="form-control" placeholder="Descrição"></textarea>
-      </div>
-    </form>
-  </div>
-
-  <div class="card-footer text-muted">
-    <div class="form-group col-sm-12 row">
-      <button (click)="enviar()" class="btn btn-sm btn-primary">
-        Salvar
-      </button>&nbsp;
-
-      <button [routerLink]="['/editora']" class="btn btn-sm btn-danger">
-        Cancelar
-      </button>&nbsp;
-      <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-secondary" title="Excluir">Excluir</button>
-    </div>
-  </div>
-</div> -->
-<br><br>
+  <br><br>
 </div>
 <nav class="navbar fixed-bottom navbar-dark bg-primary nav-bottom">
   <span>
     &nbsp;
   </span>
-  <!-- <button (click)="delete(editora.edtSeqEditora)" *ngIf="editora.edtSeqEditora" class="btn btn-sm btn-primary" title="Excluir">
-    <i class="fas fa-trash-alt"></i>
-    Excluir
-  </button> -->
 </nav>
