@@ -101,11 +101,11 @@ export class LivroService{
         return this.http.get(pathIsbn);        
     }
 
-    pesquisarPorIsbnDetalhe(selfLink: string): Observable<any>{
-        console.log(`Selflink: ${selfLink}`);
-        const pathIsbn = selfLink
-        return this.http.get(pathIsbn);        
-    }
+    // pesquisarPorIsbnDetalhe(selfLink: string): Observable<any>{
+    //     console.log(`Selflink: ${selfLink}`);
+    //     const pathIsbn = selfLink
+    //     return this.http.get(pathIsbn);        
+    // }
 
     private jsonDataToAutores(jsonData: any[]): Livro[]{
         const autores: Livro[] = [];

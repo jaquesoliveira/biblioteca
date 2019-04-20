@@ -25,25 +25,33 @@
     <a [routerLink]="[livro.livSeqLivro, 'edit']" style="text-decoration: none; ">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1  text-capitalize"> {{livro.livTitulo}} </h5>
-      </div>
-      <p class="mb-1"><strong>Resumo: </strong>{{livro.livDscLivro}}</p>
+      </div>      
+      
 
       <div class="row">
+          <div class="col-lg-8 col-8">
 
-
-        <div class="col-lg-4">
-          <small><strong>Cód. Barras: </strong> {{livro.livCodBarrasLivro}} </small>
-        </div>
-        <div class="col-lg-4">
-          <small *ngFor="let autor of livro.lstAutor"><strong>Autor: </strong>{{autor.autNomeAutor}} </small>
-        </div>
-        <div class="col-lg-4">
-          <small><strong>Editora: </strong>{{livro.edtSeqEditora.edtNomeEditora}} </small>
-        </div>
+            <div>
+                <small>{{livro.livSubTitulo}}</small>
+            </div>
+            <div>
+              <small><strong>Cód. Barras: </strong> {{livro.livCodBarrasLivro}} </small>
+            </div>
+            <div>
+                <small><strong>Autor: </strong></small>
+              <small *ngFor="let autor of livro.lstAutor" class="text-capitalize">{{autor.autNomeAutor}}; </small>
+            </div>
+            <div>
+              <small class="text-capitalize"><strong>Editora:</strong>{{livro.livEditora}} </small>
+            </div>            
+          </div>
+          <div class="col-lg-2 col-4">
+              <div class="smallThumbnail ">
+                  <img src="{{livro.livImgSmallLivro}}" class="smallThumbnail">
+                </div>
+          </div>
       </div>
       <hr>
-
-
     </a>
   </ul>
   <div *ngIf="livros.length === 0">
@@ -53,6 +61,6 @@
   <br>
 </div>
 
-<nav class="navbar fixed-bottom  navbar-dark bg-primary nav-bottom">
+<!-- <nav class="navbar fixed-bottom  navbar-dark bg-primary nav-bottom">
   <span style="color:white">Total de livros:</span>
-</nav>
+</nav> -->

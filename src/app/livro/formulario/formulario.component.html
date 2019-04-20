@@ -7,7 +7,7 @@
       <a class="btn" href="#" style="color:white">
         {{titulo}}
       </a>
-      <a [routerLink]="['/']" class="btn btn-primary" (click)="enviar()">
+      <a [routerLink]="['/livro/new']" class="btn btn-primary" (click)="enviar()">
         <i class="fas fa-check"></i>
       </a>
     </nav>
@@ -18,54 +18,78 @@
       <input type="number" formControlName="livSeqLivro" class="form-control" placeholder="Código" readonly>
     </div>
 
-    <div class="form-group col-sm-12 col-lg-4 ">
-      <label for="idLivCodBarrasLivro">Código de barras</label>
-      <input id="idLivCodBarrasLivro" type="number" formControlName="livCodBarrasLivro"
-        class="form-control form-control-sm" placeholder="Código barras">
-    </div>
+    <div class="row">
+      <div class="col-sm-12 col-lg-3 ">
+        <div class="form-group">
+          <label for="idLivCodBarrasLivro">Código de barras</label>
+          <input id="idLivCodBarrasLivro" type="number" formControlName="livCodBarrasLivro" [readonly]="!alterarBarCode"
+            class="form-control form-control-sm" placeholder="Código barras">
+        </div>
 
-    <div class="form-group col-sm-12 col-lg-4 ">
-      <button class="btn btn-primary" (click)="pesquisarIsbn()">
-        <i class="fas fa-barcode"></i> Pesquisar
-      </button>
+        <div class="form-group">
+          <button [disabled]="!alterarBarCode" class="btn btn-primary" (click)="pesquisarIsbn()">
+            <i class="fas fa-barcode"></i> Pesquisar
+          </button>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-lg-9 ">
+        <div class="form-group col-sm-12  col-lg-6">
+          <img [src]="smallThumbnail" class="smallThumbnail" *ngIf="smallThumbnail" >
+        </div> 
+      </div>
     </div>
     <hr>
 
-    <div class="form-group col-sm-12 col-lg-12 ">
-      <label for="idLivTitulo">Título</label>
-      <input id="idLivTitulo" type="text" formControlName="livTitulo"
-        class="form-control form-control-sm text-capitalize" placeholder="Titulo">
+    <div class="row ml-0 mr-0">
+      <div class="form-group col-sm-12 col-lg-4">
+        <label for="idLivTitulo">Título</label>      
+        <input id="idLivTitulo" type="text" formControlName="livTitulo"
+          class="form-control form-control-sm text-capitalize" 
+          placeholder="Titulo"
+          readonly>
+      </div>   
+      
+      <div class="form-group col-sm-12 col-lg-8 ">
+        <label for="idLivSubTitulo">Sub Título</label>
+        <input id="idLivSubTitulo" type="text" formControlName="livSubTitulo"
+          class="form-control form-control-sm text-capitalize"
+          placeholder="Sub Titulo"
+          readonly>
+      </div>      
     </div>
 
-    <div class="form-group col-lg-12 row mr-0">
+    <div class="row ml-0 mr-0">
       <div class="form-group col-sm-12  col-lg-3">
         <label for="idCtlSeqCategoriaLivro">Categoria</label>
-        <input id="idCtlSeqCategoriaLivro" type="text" formControlName="ctlSeqCategoriaLivro"
+        <input id="idCtlSeqCategoriaLivro" type="text" formControlName="livCategoria"
           class="form-control form-control-sm text-capitalize col-sm-12 col-lg-12" 
           placeholder="Categoria">
       </div>
 
       <div class="form-group col-sm-12 col-lg-3">
         <label for="idLivPaginasLivro">Páginas</label>
-        <input type="text" formControlName="livPaginasLivro" class="form-control form-control-sm text-capitalize  col-sm-12 col-lg-12"
-          placeholder="Páginas">
+        <input type="text" formControlName="livPaginasLivro" 
+          class="form-control form-control-sm col-sm-12 col-lg-12"
+          placeholder="Páginas"
+          readonly >
       </div>
 
-      <div class=" col-sm-12 col-lg-3 ">
+      <div class="form-group  col-sm-12 col-lg-3 ">
         <label for="idEdtSeqEditora">Editora</label>
-        <input type="text" formControlName="livEditora" 
+        <input type="text" formControlName="livEditora" readonly
           class="form-control form-control-sm text-capitalize  col-sm-12 col-lg-12"
           placeholder="Editora">
       </div>
 
-      <div class="col-sm-12 col-lg-3">
+      <div class="form-group col-sm-12 col-lg-3">
         <label for="idLivAnoEdicaoLivro">Ano publicação</label>
         <input id="idLivAnoEdicaoLivro" type="text" formControlName="livAnoEdicaoLivro"
           class="form-control form-control-sm col-sm-12 col-lg-12" 
           placeholder="Ano publicação">
       </div>
     </div>
-    <div class="form-group col-lg-12 row">
+    <div class="row mr-0 ml-0 ">
       <div class="form-group col-sm-12 col-lg-2">
         <input id="idLivFlgLido" type="checkbox" formControlName="livFlgLido" class="ml-0 form-check-input">
         <label class="form-check-label ml-3 " for="idLivFlgLido">Livro lido</label>
@@ -79,51 +103,38 @@
     </div>
 
     <div class="form-group col-sm-12">
-   
-    <!-- <button class="btn btn-sm btn-primary" title="Excluir">
-        <i class="fas fa-plus"></i>             
-    </button> -->
-    <table class="table table-striped table-hover" >
 
-        <thead>
-            <td colspan="2">
-                Autor(es)
-            </td>
-        </thead>
-
-        <tr *ngFor="let autor of autores">
-          <td>          
-            {{autor.autNomeAutor}}          
-          </td>
-          <td>
-            <button class="btn btn-sm btn-danger float-right" title="Excluir">
-                <i class="fas fa-trash"></i>             
-            </button>
-          </td>
-        </tr>
-      </table>    
+    <label for="idAutores" *ngIf="respIsbn.length > 0">Autor</label>
+    <table class="table table-striped table-bordered" id="idAutores" >
+      <tr *ngFor="let autor of respIsbnAuthors">
+        <td class="text-capitalize">
+          {{autor}}
+        </td>
+      </tr>
+    </table>
   </div>
     <div class="form-group col-sm-12 ">
       <label for="idLivDscLivro">Descrição</label>
       <textarea id="idLivDscLivro" rows="4" cols="50" formControlName="livDscLivro" class="form-control form-control-sm"
-        placeholder="Descrição"></textarea>
+        placeholder="Descrição" readonly style="outline: none;"></textarea>
     </div>
 
-    <!-- <div class="form-group col-sm-12 col-lg-4">
-      <select type="text" class="form-control form-control-sm text-capitalize" placeholder="Categoria">
-        <option value="" disabled>Choose a state</option>
-        <option *ngFor="let autSelected of todosOsAutores" [ngValue]="autSelected">
-          {{autSelected.autNomeAutor}}
-        </option>
-      </select>
+    <div class="row ml-0 mr-0">
+      <div class="form-group col-sm-12  col-lg-6">
+        <label for="idLivImgLivro">Inserir Imagem</label>
+        <input #file type="file" accept='image/*' (change)="preview(file.files)" 
+          class="form-control-file" id="idLivImgLivro" >
+      </div>
     </div>
-     -->
 
+    <div class="form-group col-sm-12  col-lg-6">
+        <img [src]="imgURL"class="img-upload ml-0 mr-0"  >
+      </div>  
   </form>
   <br><br>
 </div>
-<nav class="navbar fixed-bottom navbar-dark bg-primary nav-bottom">
+<!-- <nav class="navbar fixed-bottom navbar-dark bg-primary nav-bottom">
   <span>
     &nbsp;
   </span>
-</nav>
+</nav> -->

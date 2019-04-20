@@ -7,13 +7,18 @@ export class Livro{
         public livSeqLivro?: number,
         public livCodBarrasLivro?: number,
         public livTitulo?: string,
+        public livSubTitulo?: string,
         public livDscLivro?: string,
         public livAnoEdicaoLivro?: string,
         public livEditora?: string,
-        public ctlSeqCategoriaLivro?: Number,        
+        public livCategoria?: Number,        
         public livFlgLido?: boolean,
         public livFlgLiteraturaEstrangeira?: boolean,
         public livPaginasLivro?: number,
-        public lstAutor?: Autor[]
-        ){}
+        public lstAutor?: string[],
+        public livImgLivro?: string,
+        public livImgSmallLivro?: string
+        ){
+
+        }
 }
