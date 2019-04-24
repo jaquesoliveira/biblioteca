@@ -18,7 +18,7 @@
       <input type="number" formControlName="livSeqLivro" class="form-control" placeholder="Código" readonly>
     </div>
 
-    <div class="row">
+    <div class="row  ml-0 mr-0">
       <div class="col-sm-12 col-lg-3 ">
         <div class="form-group">
           <label for="idLivCodBarrasLivro">Código de barras</label>
@@ -47,7 +47,7 @@
         <input id="idLivTitulo" type="text" formControlName="livTitulo"
           class="form-control form-control-sm text-capitalize" 
           placeholder="Titulo"
-          readonly>
+          [readonly]="!inserirManualmente">
       </div>   
       
       <div class="form-group col-sm-12 col-lg-8 ">
@@ -55,7 +55,7 @@
         <input id="idLivSubTitulo" type="text" formControlName="livSubTitulo"
           class="form-control form-control-sm text-capitalize"
           placeholder="Sub Titulo"
-          readonly>
+          [readonly]="!inserirManualmente">
       </div>      
     </div>
 
@@ -72,12 +72,12 @@
         <input type="text" formControlName="livPaginasLivro" 
           class="form-control form-control-sm col-sm-12 col-lg-12"
           placeholder="Páginas"
-          readonly >
+          [readonly]="!inserirManualmente" >
       </div>
 
       <div class="form-group  col-sm-12 col-lg-3 ">
         <label for="idEdtSeqEditora">Editora</label>
-        <input type="text" formControlName="livEditora" readonly
+        <input type="text" formControlName="livEditora" [readonly]="!inserirManualmente"
           class="form-control form-control-sm text-capitalize  col-sm-12 col-lg-12"
           placeholder="Editora">
       </div>
@@ -102,6 +102,28 @@
       </div>
     </div>
 
+    <div class="row ml-0 mr-0" *ngIf="inserirManualmente">
+      <div class="col-sm-12 col-lg-3 ">
+        <div class="form-group">
+          <!-- <label for="idAutor">Autor</label> -->
+          <input #file id="idAutor" type="text" formControlName="nomeAutor"
+            class="form-control form-control-sm" placeholder="Nome do autor">
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary" (click)="addAutor(file)">
+            <i class="fas fa-plus"></i> Adicionar
+          </button>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-lg-9 ">
+        <div class="form-group col-sm-12  col-lg-6">
+          <img [src]="smallThumbnail" class="smallThumbnail" *ngIf="smallThumbnail" >
+        </div> 
+      </div>
+    </div>
+
     <div class="form-group col-sm-12">
 
     <label for="idAutores" *ngIf="respIsbn.length > 0">Autor</label>
@@ -110,13 +132,18 @@
         <td class="text-capitalize">
           {{autor}}
         </td>
+        <td *ngIf="inserirManualmente">
+          <button class="btn btn-danger" (click)="excluirAutor(autor)">
+            <i class="fas fa-trash"></i> 
+          </button>
+        </td>
       </tr>
     </table>
   </div>
     <div class="form-group col-sm-12 ">
       <label for="idLivDscLivro">Descrição</label>
       <textarea id="idLivDscLivro" rows="4" cols="50" formControlName="livDscLivro" class="form-control form-control-sm"
-        placeholder="Descrição" readonly style="outline: none;"></textarea>
+        placeholder="Descrição" style="outline: none;"  [readonly]="!inserirManualmente"></textarea>
     </div>
 
     <div class="row ml-0 mr-0">

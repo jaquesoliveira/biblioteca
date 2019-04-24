@@ -18,23 +18,6 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 })
 export class FormularioComponent implements OnInit,  AfterContentChecked {
 
-  @ViewChild(NgAutoCompleteComponent) public completer: NgAutoCompleteComponent;
-    
-  public group = [
-      CreateNewAutocompleteGroup(
-          'Search / choose in / from list',
-          'completer',
-          [
-              {title: 'Option 1', id: '1'},
-              {title: 'Option 2', id: '2'},
-              {title: 'Option 3', id: '3'},
-              {title: 'Option 4', id: '4'},
-              {title: 'Option 5', id: '5'},
-          ],
-          {titleKey: 'title', childrenKey: null}
-      ),
-  ];
-
   currentAction: string;
   titulo: string;
   livroForm: FormGroup;  
@@ -46,13 +29,12 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
   respIsbnDetalhes: any = "";
   respIsbnAuthors: any[] = [];
   alterarBarCode: boolean;
+  inserirManualmente: boolean;
   imagePath: any;
   imgURL: any;
   smallThumbnail: any;
   respIsbnImages: any[] = [];
-
-
-
+  @Input() nomeAutor: string
   
   @Input() livro: Livro = new Livro();
 
@@ -73,8 +55,8 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
   ngOnInit() {
     this.setCurrentAction();
     this.buildLivroForm();    
-    this.loadLivro();    
-  
+    this.loadLivro();
+    this.inserirManualmente = false  
   }  
 
   ngAfterContentChecked(){    
@@ -101,9 +83,10 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
       .subscribe(
         data => {
           if(data != undefined){
-            this.respIsbn = data.items[0].volumeInfo;
 
-            this.respIsbnDetalhes = data.volumeInfo;
+            if(this.respIsbn = data.items != undefined){
+              this.respIsbn = data.items[0].volumeInfo;
+              this.respIsbnDetalhes = data.volumeInfo;
               livro.livTitulo = this.respIsbn.title
               livro.livSubTitulo = this.respIsbn.subtitle
               livro.livDscLivro = this.respIsbn.description
@@ -129,10 +112,28 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
               livro.lstAutor = this.respIsbn.authors
               this.buildLivroForm();
               this.livroForm.patchValue(livro)
-              
+            }
+            else{
+              this.inserirManualmente = true
+              toastr.info("Livro não localizado. Insira manualmente!")
+              this.respIsbn = ['']
+            }              
           }
       });
     }    
+  }
+
+  addAutor(nomeAutor: any){
+    this.respIsbnAuthors.push(nomeAutor.value)
+    this.livro.lstAutor = this.respIsbnAuthors
+    this.livroForm.patchValue(this.livro)
+  }
+
+  excluirAutor(autor: any){
+    const index = this.respIsbnAuthors.indexOf(autor);
+    this.respIsbnAuthors.splice(index, 1);
+    this.livro.lstAutor = this.respIsbnAuthors
+    this.livroForm.patchValue(this.livro)
   }
 
   enviar(){
@@ -206,14 +207,11 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
     });
   }
 
-  preview(files) {
-
-    
-    if (files.length === 0){
-      
+  preview(files) {    
+    if (files.length === 0){      
       return;
     }
- 
+
     var mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
       //this.message = "Only images are supported.";      
