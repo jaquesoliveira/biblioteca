@@ -5,10 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LivroService } from '../livro.service';
 import toastr from 'toastr';
 import { switchMap } from 'rxjs/operators';
-import { Editora } from 'src/app/editora/editora.model';
+import { Editora } from 'src/app/pages/editora/editora.model';
 import { NgAutoCompleteComponent, CreateNewAutocompleteGroup, SelectedAutocompleteItem } from 'ng-auto-complete';
-import { Autor } from 'src/app/autor/autor.model';
-import { AutorService } from 'src/app/autor/autor.service';
+import { Autor } from 'src/app/pages/autor/autor.model';
+import { AutorService } from 'src/app/pages/autor/autor.service';
 import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
@@ -153,9 +153,7 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
       dadosFormulario.lstAutor,
       this.imgURL,
       this.smallThumbnail
-    ); 
-
-   
+    );
 
     if( this.route.snapshot.url[0].path == "new"){
       
@@ -163,8 +161,7 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
 
       this.livroService.create(livro)
         .subscribe(
-          livro => this.actionsForSuccess(),
-          //error => alert('Houve um erro!')     
+          livro => this.actionsForSuccess(),     
           error => this.actionsForError(error)     
         );
     }else{
@@ -228,9 +225,7 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
     reader.readAsDataURL(files[0]); 
     reader.onload = (_event) => { 
       this.imgURL = reader.result;      
-    }
-
-    
+    }    
   }
   private loadLivro(){    
     if(this.currentAction == "edit"){
@@ -242,7 +237,10 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
           this.livro = livro;
           this.respIsbnAuthors = livro.lstAutor;
           this.imgURL = livro.livImgLivro;
-          this.smallThumbnail = livro.livImgSmallLivro;
+          this.smallThumbnail = livro.livImgSmallLivro;          
+          if(!this.smallThumbnail){
+            this.smallThumbnail = livro.livImgLivro;  
+          }
           this.livroForm.patchValue(livro);
         },
         (error) => alert(error.error)
@@ -252,9 +250,16 @@ export class FormularioComponent implements OnInit,  AfterContentChecked {
 
   private actionsForSuccess(){
     toastr.info("Operação realizada com sucesso!")
+
     this.router.navigateByUrl("livro", {skipLocationChange: true}).then(
-       () => this.router.navigate(["livro"])
+        () => this.router.navigate(["livro"])
     )
+    // const id =  this.route.snapshot.url[0].path
+    // if(id != undefined){
+    //     this.router.navigateByUrl("livro", {skipLocationChange: true}).then(
+    //     () => this.router.navigate([`livro/${id}/edit`])
+    //   )
+    // }    
   }
 
   private actionsForError(error){

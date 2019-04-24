@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [  
   {path: '', component: HomeComponent},
-  {path: 'autor', loadChildren: './autor/autor.module#AutorModule'},
-  {path: 'editora', loadChildren: './editora/editora.module#EditoraModule'},
-  {path: 'livro', loadChildren: './livro/livro.module#LivroModule'}  
+  {path: 'autor', loadChildren: './pages/autor/autor.module#AutorModule'},
+  {path: 'editora', loadChildren: './pages/editora/editora.module#EditoraModule'},
+  {path: 'livro', loadChildren: './pages/livro/livro.module#LivroModule'}  
 ];
 
 @NgModule({
